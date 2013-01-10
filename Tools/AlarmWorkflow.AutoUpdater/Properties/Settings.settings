@@ -8,11 +8,20 @@
     <Setting Name="UpdateFilesDirectory" Type="System.String" Scope="Application">
       <Value Profile="(Default)">packages/aw/updates</Value>
     </Setting>
-    <Setting Name="UpdateServerVersionFileName" Type="System.String" Scope="Application">
+    <Setting Name="UpdateServerVersionOldFileName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">serverversion.xml</Value>
     </Setting>
     <Setting Name="OcrSoftwarePackageFileName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">ocrpackage.zip</Value>
+    </Setting>
+    <Setting Name="UpdateServerVersionListFileName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">versions.xml</Value>
+    </Setting>
+    <Setting Name="PackagesListFileName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">packages.xml</Value>
+    </Setting>
+    <Setting Name="PackagesDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">pkg</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -1,0 +1,59 @@
+<PackagesList>
+  <!-- Base package - must have no dependencies! -->
+  <Package Id="(Base)" DisplayName="AlarmWorkflow base package" Category="Base" Author="The AlarmWorkflow-Team">
+    <Description></Description>
+    <Dependencies />
+  </Package>
+
+  <!-- AlarmWorkflow-Packages -->
+  <!-- AlarmSources -->
+  <Package Id="AlarmSource.Fax" DisplayName="Fax Alarmquelle" Category="AlarmSource" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="AlarmSource.Sms" DisplayName="SMS Alarmquelle" Category="AlarmSource" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="AlarmSource.EMail" DisplayName="E-Mail Alarmquelle" Category="AlarmSource" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+
+  <!-- RoutePlanProviders -->
+  <Package Id="RoutePlanProviders.GoogleMaps" DisplayName="Google Maps Routenplaner" Category="RoutePlanProvider" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+
+  <!-- Parsers -->
+  <Package Id="Parser.Generic" DisplayName="Universalparser" Category="Parser" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
+  </Package>
+  <!-- TODO: Parsers -->
+
+  <!-- Jobs -->
+  <Package Id="Job.MySqlDatabase" DisplayName="MySQL Datenbank" Category="Job" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+  <!-- TODO: Jobs -->
+
+  <!-- TODO: Service -->
+  <!-- TODO: UI -->
+  
+</PackagesList>
