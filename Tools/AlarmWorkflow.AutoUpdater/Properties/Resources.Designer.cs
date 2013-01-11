@@ -61,47 +61,14 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bitte schließen Sie laufende UIs und bestätigen Sie das Update..
+        ///   Looks up a localized string similar to Das gewählte Paket kann nicht abgewählt werden. Folgende Pakete haben Abhängigkeiten zu diesem:
+        ///{0}
+        ///
+        ///Möchten Sie dieses Paket dennoch abwählen? Alle abhängigen Pakete werden dann automatisch mit abgewählt..
         /// </summary>
-        internal static string ConfirmUpdateMessage {
+        internal static string CannotUnscheduleBecauseOfExistingDependenciesMessage {
             get {
-                return ResourceManager.GetString("ConfirmUpdateMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Could not move the directory &apos;{0}&apos; to &apos;{1}&apos;. Please check if it exists and contains the files from the old directory. If not please manually move these over!.
-        /// </summary>
-        internal static string LegacyTaskMoveFailedMessage {
-            get {
-                return ResourceManager.GetString("LegacyTaskMoveFailedMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sie haben bereits die angegebene Version. Möchten Sie dennoch Ihre lokale Installation mit der Serverversion überschreiben? Ihre Einstellungen bleiben gespeichert..
-        /// </summary>
-        internal static string OfferForceUpdateMessage {
-            get {
-                return ResourceManager.GetString("OfferForceUpdateMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Das Update wurde abgeschlossen!.
-        /// </summary>
-        internal static string UpdateCompleteMessage {
-            get {
-                return ResourceManager.GetString("UpdateCompleteMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Das Update ist fehlgeschlagen. Fehler: {0}.
-        /// </summary>
-        internal static string UpdateFailedWithExceptionMessage {
-            get {
-                return ResourceManager.GetString("UpdateFailedWithExceptionMessage", resourceCulture);
+                return ResourceManager.GetString("CannotUnscheduleBecauseOfExistingDependenciesMessage", resourceCulture);
             }
         }
     }

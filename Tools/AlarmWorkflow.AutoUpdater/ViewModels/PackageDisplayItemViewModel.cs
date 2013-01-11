@@ -1,4 +1,5 @@
-﻿using AlarmWorkflow.Tools.AutoUpdater.Versioning;
+﻿using System.Linq;
+using AlarmWorkflow.Tools.AutoUpdater.Versioning;
 using AlarmWorkflow.Windows.UIContracts.ViewModels;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
@@ -8,7 +9,18 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
     /// </summary>
     class PackageDisplayItemViewModel : ViewModelBase
     {
+        #region Fields
+
+        private bool _isScheduledForInstallOrUpdate;
+
+        #endregion
+
         #region Properties
+
+        /// <summary>
+        /// Gets the parent VM that we are attached to.
+        /// </summary>
+        public PackageListControlViewModel Parent { get; private set; }
 
         /// <summary>
         /// Gets/sets the generic package information from the server.
@@ -21,12 +33,72 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
         /// <summary>
         /// Gets/sets whether or not this item has been selected for install or update.
         /// </summary>
-        public bool IsInstallOrUpdate { get; set; }
+        public bool IsScheduledForInstallOrUpdate
+        {
+            get { return _isScheduledForInstallOrUpdate; }
+            set
+            {
+                if (value == _isScheduledForInstallOrUpdate)
+                {
+                    return;
+                }
+
+                if (value)
+                {
+                    /* If we schedule this item for install/update,
+                     * we also have to schedule the dependencies!
+                     */
+
+                    var requiredDependencies = this.Info.Dependencies.SelectMany(d => Parent.Packages.Where(p => p.Info.Identifier == d));
+                    foreach (var item in requiredDependencies)
+                    {
+                        item.IsScheduledForInstallOrUpdate = true;
+                    }
+                }
+                else
+                {
+                    // Don't allow removal if there are dependencies!
+                    var dependenciesOfMe = Parent.Packages.Where(p => p.IsScheduledForInstallOrUpdate && p.Info.Dependencies.Contains(this.Info.Identifier));
+                    if (dependenciesOfMe.Any())
+                    {
+                        string msg = string.Join("\n-", dependenciesOfMe.Select(d => d.Info.DisplayName));
+                        if (!Utilities.ConfirmMessageBox(Properties.Resources.CannotUnscheduleBecauseOfExistingDependenciesMessage, msg))
+                        {
+                            return;
+                        }
+
+                        // Disable all packages without notice
+                        foreach (var item in dependenciesOfMe)
+                        {
+                            item._isScheduledForInstallOrUpdate = false;
+                            item.OnPropertyChanged("IsScheduledForInstallOrUpdate");
+                        }
+                    }
+                }
+
+                _isScheduledForInstallOrUpdate = value;
+                OnPropertyChanged("IsScheduledForInstallOrUpdate");
+            }
+        }
         /// <summary>
         /// Gets/sets whether or not this item is already installed.
         /// </summary>
         public bool IsInstalled { get; set; }
 
         #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parent">The parent VM that we are attached to.</param>
+        public PackageDisplayItemViewModel(PackageListControlViewModel parent)
+        {
+            this.Parent = parent;
+        }
+
+        #endregion
+
     }
 }

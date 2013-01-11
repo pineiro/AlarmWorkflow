@@ -29,7 +29,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
         {
             foreach (var item in App.GetApp().Model.PackageListServer.Packages)
             {
-                PackageDisplayItemViewModel vm = new PackageDisplayItemViewModel();
+                PackageDisplayItemViewModel vm = new PackageDisplayItemViewModel(this);
                 vm.Info = item;
                 vm.Detail = App.GetApp().Model.PackageListServer.PackageDetails.FirstOrDefault(pd => pd.ParentIdentifier == item.Identifier);
 
