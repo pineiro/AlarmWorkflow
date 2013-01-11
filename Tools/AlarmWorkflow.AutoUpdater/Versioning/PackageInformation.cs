@@ -16,6 +16,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
         public string Description { get; set; }
         public string Category { get; set; }
         public string Author { get; set; }
+        public PackageState State { get; set; }
         /// <summary>
         /// Gets/sets the dependencies to other packages that this package has.
         /// The list contains the Identifiers of the packages.
@@ -29,6 +30,23 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
         internal PackageInformation()
         {
             Dependencies = new List<string>();
+        }
+
+        #endregion
+
+        #region Nested types
+
+        public enum PackageState
+        {
+            /// <summary>
+            /// Default package state. The package is in active development.
+            /// </summary>
+            Active = 0,
+            /// <summary>
+            /// The package is deprecated and should not be used intentionally.
+            /// This package is only included to ensure backwards compatibility.
+            /// </summary>
+            Deprecated = 10,
         }
 
         #endregion

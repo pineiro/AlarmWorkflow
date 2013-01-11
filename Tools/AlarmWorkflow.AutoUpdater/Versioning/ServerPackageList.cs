@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml.Linq;
@@ -66,6 +67,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
             package.Category = packageE.Attribute("Category").Value;
             package.Author = packageE.Attribute("Author").Value;
             package.Description = packageE.Element("Description").Value;
+            package.State = ReadPackageState(packageE);
 
             foreach (XElement dependencyE in packageE.Element("Dependencies").Elements("Id"))
             {
@@ -73,6 +75,16 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
             }
 
             return package;
+        }
+
+        private static PackageInformation.PackageState ReadPackageState(XElement packageE)
+        {
+            XAttribute stateA = packageE.Attribute("State");
+            if (stateA != null)
+            {
+                return (PackageInformation.PackageState)Enum.Parse(typeof(PackageInformation.PackageState), stateA.Value, false);
+            }
+            return PackageInformation.PackageState.Active;
         }
 
         private static void CreatePackageDetails(IServerClient serverClient, ServerPackageList list)

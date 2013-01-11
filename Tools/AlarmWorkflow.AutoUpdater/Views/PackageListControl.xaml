@@ -19,6 +19,16 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding Info.DisplayName}" Width="200" IsReadOnly="True" />
                 <DataGridTextColumn Header="Kategorie" Binding="{Binding Info.Category}" Width="200" IsReadOnly="True" />
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Info.State}" Value="Deprecated">
+                            <Setter Property="Background" Value="OrangeRed" />
+                            <Setter Property="ToolTip" Value="Veraltet!" />
+                         </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
         <GridSplitter Grid.Column="0"  Width="3" ResizeDirection="Columns" />
 
