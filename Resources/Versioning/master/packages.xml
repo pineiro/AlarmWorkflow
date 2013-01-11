@@ -193,7 +193,7 @@
     <Description>Eine Konsolenanwendung, die den Service hostet. Nur für Debuggingzwecke geeignet!</Description>
     <Dependencies>
       <Id>(Base)</Id>
-      <Id>Service.Windows</Id>
+      <Id>Service.WindowsService</Id>
     </Dependencies>
   </Package>
 
