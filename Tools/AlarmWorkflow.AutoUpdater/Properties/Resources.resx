@@ -123,4 +123,16 @@
 
 Möchten Sie dieses Paket dennoch abwählen? Alle abhängigen Pakete werden dann automatisch mit abgewählt.</value>
   </data>
+  <data name="PackageIsDeprecatedWarningMessage" xml:space="preserve">
+    <value>Das gewählte Paket ist gekennzeichnet als "veraltet" (deprecated). Dies bedeutet, dass es sich nicht mehr in aktiver Entwicklung befindet und nur aus Kompatibilitätsgründen noch enthalten ist. Wenn Fragen hierzu bestehen, wenden Sie sich bitte an das AlarmWorkflow-Team. Danke.
+
+Wenn Sie möchten, können Sie fortfahren.</value>
+  </data>
+  <data name="PackageIsWIPWarningMessage" xml:space="preserve">
+    <value>Das gewählte Paket ist gekennzeichnet als "work in progress" (WIP). Dies bedeutet, dass die es sich noch in der Entstehungsphase befindet, weswegen einige Funktionen möglicherweise nicht ausgereift sind. Benutzung dies Paketes geschieht auf eigene Gefahr.
+
+Sie sind herzlich eingeladen, dieses Paket zu testen und Fehler bzw. Anregungen an das Team zu senden. 
+
+Wenn Sie möchten, können Sie fortfahren.</value>
+  </data>
 </root>

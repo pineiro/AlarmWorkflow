@@ -68,6 +68,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
             package.Author = packageE.Attribute("Author").Value;
             package.Description = packageE.Element("Description").Value;
             package.State = ReadPackageState(packageE);
+            package.Recommendation = ReadPackageRecommendation(packageE);
 
             foreach (XElement dependencyE in packageE.Element("Dependencies").Elements("Id"))
             {
@@ -85,6 +86,16 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
                 return (PackageInformation.PackageState)Enum.Parse(typeof(PackageInformation.PackageState), stateA.Value, false);
             }
             return PackageInformation.PackageState.Active;
+        }
+
+        private static PackageInformation.RecommendationType ReadPackageRecommendation(XElement packageE)
+        {
+            XAttribute recA = packageE.Attribute("Recommendation");
+            if (recA != null)
+            {
+                return (PackageInformation.RecommendationType)Enum.Parse(typeof(PackageInformation.RecommendationType), recA.Value, false);
+            }
+            return PackageInformation.RecommendationType.None;
         }
 
         private static void CreatePackageDetails(IServerClient serverClient, ServerPackageList list)

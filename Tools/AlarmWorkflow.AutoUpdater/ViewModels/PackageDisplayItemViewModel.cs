@@ -36,50 +36,9 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
         public bool IsScheduledForInstallOrUpdate
         {
             get { return _isScheduledForInstallOrUpdate; }
-            set
-            {
-                if (value == _isScheduledForInstallOrUpdate)
-                {
-                    return;
-                }
-
-                if (value)
-                {
-                    /* If we schedule this item for install/update,
-                     * we also have to schedule the dependencies!
-                     */
-
-                    var requiredDependencies = this.Info.Dependencies.SelectMany(d => Parent.Packages.Where(p => p.Info.Identifier == d));
-                    foreach (var item in requiredDependencies)
-                    {
-                        item.IsScheduledForInstallOrUpdate = true;
-                    }
-                }
-                else
-                {
-                    // Don't allow removal if there are dependencies!
-                    var dependenciesOfMe = Parent.Packages.Where(p => p.IsScheduledForInstallOrUpdate && p.Info.Dependencies.Contains(this.Info.Identifier));
-                    if (dependenciesOfMe.Any())
-                    {
-                        string msg = string.Join("\n-", dependenciesOfMe.Select(d => d.Info.DisplayName));
-                        if (!Utilities.ConfirmMessageBox(Properties.Resources.CannotUnscheduleBecauseOfExistingDependenciesMessage, msg))
-                        {
-                            return;
-                        }
-
-                        // Disable all packages without notice
-                        foreach (var item in dependenciesOfMe)
-                        {
-                            item._isScheduledForInstallOrUpdate = false;
-                            item.OnPropertyChanged("IsScheduledForInstallOrUpdate");
-                        }
-                    }
-                }
-
-                _isScheduledForInstallOrUpdate = value;
-                OnPropertyChanged("IsScheduledForInstallOrUpdate");
-            }
+            set { SetIsScheduledForInstallOrUpdate(value, true); }
         }
+
         /// <summary>
         /// Gets/sets whether or not this item is already installed.
         /// </summary>
@@ -96,6 +55,78 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
         public PackageDisplayItemViewModel(PackageListControlViewModel parent)
         {
             this.Parent = parent;
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void SetIsScheduledForInstallOrUpdate(bool value, bool interactiveMode)
+        {
+            if (value == _isScheduledForInstallOrUpdate)
+            {
+                return;
+            }
+
+            if (value)
+            {
+                if (interactiveMode)
+                {
+                    switch (this.Info.State)
+                    {
+                        case PackageInformation.PackageState.WIP:
+                            if (!Utilities.ConfirmMessageBox(Properties.Resources.PackageIsWIPWarningMessage))
+                            {
+                                return;
+                            }
+                            break;
+                        case PackageInformation.PackageState.Deprecated:
+                            if (!Utilities.ConfirmMessageBox(Properties.Resources.PackageIsDeprecatedWarningMessage))
+                            {
+                                return;
+                            }
+                            break;
+                        case PackageInformation.PackageState.Active:
+                        default:
+                            break;
+                    }
+                }
+
+                /* If we schedule this item for install/update,
+                 * we also have to schedule the dependencies!
+                 */
+                var requiredDependencies = this.Info.Dependencies.SelectMany(d => Parent.Packages.Where(p => p.Info.Identifier == d));
+                foreach (var item in requiredDependencies)
+                {
+                    item.IsScheduledForInstallOrUpdate = true;
+                }
+            }
+            else
+            {
+                // Don't allow removal if there are dependencies!
+                var dependenciesOfMe = Parent.Packages.Where(p => p.IsScheduledForInstallOrUpdate && p.Info.Dependencies.Contains(this.Info.Identifier));
+                if (dependenciesOfMe.Any())
+                {
+                    if (interactiveMode)
+                    {
+                        string msg = string.Join("\n-", dependenciesOfMe.Select(d => d.Info.DisplayName));
+                        if (!Utilities.ConfirmMessageBox(Properties.Resources.CannotUnscheduleBecauseOfExistingDependenciesMessage, msg))
+                        {
+                            return;
+                        }
+                    }
+
+                    // Disable all packages without notice
+                    foreach (var item in dependenciesOfMe)
+                    {
+                        item._isScheduledForInstallOrUpdate = false;
+                        item.OnPropertyChanged("IsScheduledForInstallOrUpdate");
+                    }
+                }
+            }
+
+            _isScheduledForInstallOrUpdate = value;
+            OnPropertyChanged("IsScheduledForInstallOrUpdate");
         }
 
         #endregion
