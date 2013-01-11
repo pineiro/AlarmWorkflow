@@ -1,25 +1,25 @@
 <PackagesList>
   <!-- Base package - must have no dependencies! -->
-  <Package Id="(Base)" DisplayName="AlarmWorkflow base package" Category="Base" Author="The AlarmWorkflow-Team">
-    <Description></Description>
+  <Package Id="(Base)" DisplayName="AlarmWorkflow (Basispaket)" Category="Basis" Author="The AlarmWorkflow-Team">
+    <Description>Basispaket für alle Komponenten.</Description>
     <Dependencies />
   </Package>
 
   <!-- AlarmWorkflow-Packages -->
   <!-- AlarmSources -->
-  <Package Id="AlarmSource.Fax" DisplayName="Fax Alarmquelle" Category="AlarmSource" Author="">
+  <Package Id="AlarmSource.Fax" DisplayName="Fax Alarmquelle" Category="Alarmquelle" Author="">
     <Description></Description>
     <Dependencies>
       <Id>(Base)</Id>
     </Dependencies>
   </Package>
-  <Package Id="AlarmSource.Sms" DisplayName="SMS Alarmquelle" Category="AlarmSource" Author="">
+  <Package Id="AlarmSource.Sms" DisplayName="SMS Alarmquelle" Category="Alarmquelle" Author="">
     <Description></Description>
     <Dependencies>
       <Id>(Base)</Id>
     </Dependencies>
   </Package>
-  <Package Id="AlarmSource.EMail" DisplayName="E-Mail Alarmquelle" Category="AlarmSource" Author="">
+  <Package Id="AlarmSource.EMail" DisplayName="E-Mail Alarmquelle" Category="Alarmquelle" Author="">
     <Description></Description>
     <Dependencies>
       <Id>(Base)</Id>
@@ -27,7 +27,7 @@
   </Package>
 
   <!-- RoutePlanProviders -->
-  <Package Id="RoutePlanProviders.GoogleMaps" DisplayName="Google Maps Routenplaner" Category="RoutePlanProvider" Author="">
+  <Package Id="RoutePlanProviders.GoogleMaps" DisplayName="Google Maps Routenplaner" Category="Routenplaner" Author="">
     <Description></Description>
     <Dependencies>
       <Id>(Base)</Id>
@@ -42,18 +42,220 @@
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
-  <!-- TODO: Parsers -->
+  <Package Id="Parser.ILSAllgaeuParser" DisplayName="ILS Allgäu Parser" Category="Parser" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Parser.IlsAnsbach" DisplayName="ILS Ansbach Parser" Category="Parser" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Parser.ILSFFBGermering" DisplayName="ILS FFB (Germering) Parser" Category="Parser" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Parser.ILSFFB" DisplayName="ILS FFB Parser" Category="Parser" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Parser.ILSKaiserslautern" DisplayName="ILS Kaiserslautern Parser" Category="Parser" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Parser.ILSOberland" DisplayName="ILS Oberland Parser" Category="Parser" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Parser.ILSRosenheim" DisplayName="ILS Rosenheim Parser" Category="Parser" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Parser.ILSSchweinfurt" DisplayName="ILS Schweinfurt Parser" Category="Parser" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Parser.ILSStraubing" DisplayName="ILS Straubing Parser" Category="Parser" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Parser.ILSTraunstein" DisplayName="ILS Traunstein Parser" Category="Parser" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Parser.MucLand" DisplayName="München Land Parser" Category="Parser" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
+  </Package>
 
   <!-- Jobs -->
+  <Package Id="Job.AlarmMonitorFeeder" DisplayName="AlarmMonitor-Feeder" Category="Job" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Job.AlarmSourcePrinter" DisplayName="Alarmquellendruck" Category="Job" Author="">
+    <Description>Druckt den Inhalt von Alarmquellen aus.</Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Job.DisplayWakeUp" DisplayName="Displaysteuerung" Category="Job" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Job.eAlarm" DisplayName="eAlarm Sender" Category="Job" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Job.Growl" DisplayName="Growl Sender" Category="Job" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Job.Mailing" DisplayName="Mailing" Category="Job" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
   <Package Id="Job.MySqlDatabase" DisplayName="MySQL Datenbank" Category="Job" Author="">
     <Description></Description>
     <Dependencies>
       <Id>(Base)</Id>
     </Dependencies>
   </Package>
-  <!-- TODO: Jobs -->
+  <Package Id="Job.Prowl" DisplayName="Prowl Sender" Category="Job" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Job.Sms" DisplayName="SMS" Category="Job" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Job.SQLCEDatabaseJob" DisplayName="SQL Compact Edition Datenbank" Category="Job" Author="" State="Deprecated">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
 
-  <!-- TODO: Service -->
-  <!-- TODO: UI -->
+  <!-- Service -->
+  <Package Id="Service.WindowsService" DisplayName="Windows Service" Category="Service" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="Service.DebugConsole" DisplayName="Windows Service Debug Console" Category="Service" Author="">
+    <Description>Eine Konsolenanwendung, die den Service hostet. Nur für Debuggingzwecke geeignet!</Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>Service.Windows</Id>
+    </Dependencies>
+  </Package>
+
+  <!-- UI -->
+  <Package Id="WinUI.Base" DisplayName="Windows-UI (Basispaket)" Category="Windows UI" Author="">
+    <Description>Basispaket der Windows UI. Enthält die Anwendung.</Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+    </Dependencies>
+  </Package>
+  <!-- UI/Configuration editor -->
+  <Package Id="WinUI.ConfEd" DisplayName="Konfigurationseditor" Category="Windows UI" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>WinUI.Base</Id>
+    </Dependencies>
+  </Package>
+  <!-- UI/Jobs -->
+  <Package Id="WinUI.Job.ExternalTool" DisplayName="Externe Programme" Category="Windows UI" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>WinUI.Base</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="WinUI.Job.Printing" DisplayName="Oberflächendruck" Category="Windows UI" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>WinUI.Base</Id>
+    </Dependencies>
+  </Package>
+  <!-- UI/OperationViewers -->
+  <Package Id="WinUI.OV.IlsAnsbach" DisplayName="ILS Ansbach" Category="Alarmdetailansichten" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>WinUI.Base</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="WinUI.OV.IlsDarmstadt" DisplayName="ILS Darmstadt" Category="Alarmdetailansichten" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>WinUI.Base</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="WinUI.OV.Custom" DisplayName="Benutzerdefinierte Ansicht" Category="Alarmdetailansichten" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>WinUI.Base</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="WinUI.OV.CustomWidgets" DisplayName="Gadgets" Category="Alarmdetailansichten" Author="">
+    <Description>Enthält Gadgets für die Benutzerdefinierte Ansicht.</Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>WinUI.Base</Id>
+      <Id>WinUI.OV.Custom</Id>
+    </Dependencies>
+  </Package>
   
 </PackagesList>
