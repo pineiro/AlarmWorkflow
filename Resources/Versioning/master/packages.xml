@@ -228,29 +228,55 @@
     </Dependencies>
   </Package>
   <!-- UI/OperationViewers -->
-  <Package Id="WinUI.OV.IlsAnsbach" DisplayName="ILS Ansbach" Category="Alarmdetailansichten" Author="">
+  <Package Id="WinUI.OV.IlsAnsbach" DisplayName="ILS Ansbach" Category="Alarmdetailansicht" Author="">
+    <Description></Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>WinUI.Base</Id>
+	  <Id>Parser.IlsAnsbach</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="WinUI.OV.IlsDarmstadt" DisplayName="ILS Darmstadt" Category="Alarmdetailansicht" Author="">
     <Description></Description>
     <Dependencies>
       <Id>(Base)</Id>
       <Id>WinUI.Base</Id>
     </Dependencies>
   </Package>
-  <Package Id="WinUI.OV.IlsDarmstadt" DisplayName="ILS Darmstadt" Category="Alarmdetailansichten" Author="">
+  <!-- UI/OperationViewer/Custom -->
+  <Package Id="WinUI.OV.Custom" DisplayName="Benutzerdefinierte Ansicht" Category="Alarmdetailansicht" Author="">
     <Description></Description>
     <Dependencies>
       <Id>(Base)</Id>
       <Id>WinUI.Base</Id>
     </Dependencies>
   </Package>
-  <Package Id="WinUI.OV.Custom" DisplayName="Benutzerdefinierte Ansicht" Category="Alarmdetailansichten" Author="">
-    <Description></Description>
+  <Package Id="WinUI.OV.CustomWidget.Clock" DisplayName="Uhr" Category="Benutzerdefinierte Ansicht-Gadget" Author="">
+    <Description>Eine Uhr für die Benutzerdefinierte Ansicht.</Description>
     <Dependencies>
       <Id>(Base)</Id>
       <Id>WinUI.Base</Id>
+      <Id>WinUI.OV.Custom</Id>
     </Dependencies>
   </Package>
-  <Package Id="WinUI.OV.CustomWidgets" DisplayName="Gadgets" Category="Alarmdetailansichten" Author="">
-    <Description>Enthält Gadgets für die Benutzerdefinierte Ansicht.</Description>
+  <Package Id="WinUI.OV.CustomWidget.GoogleMaps" DisplayName="Google Maps-Karte" Category="Benutzerdefinierte Ansicht-Gadget" Author="">
+    <Description>Eine Google Maps-Karte für die Benutzerdefinierte Ansicht.</Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>WinUI.Base</Id>
+      <Id>WinUI.OV.Custom</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="WinUI.OV.CustomWidget.Operation" DisplayName="Einsatzdetailliste" Category="Benutzerdefinierte Ansicht-Gadget" Author="">
+    <Description>Einsatzdetailliste für die Benutzerdefinierte Ansicht.</Description>
+    <Dependencies>
+      <Id>(Base)</Id>
+      <Id>WinUI.Base</Id>
+      <Id>WinUI.OV.Custom</Id>
+    </Dependencies>
+  </Package>
+  <Package Id="WinUI.OV.CustomWidget.OSM" DisplayName="OpenStreetMap-Karte" Category="Benutzerdefinierte Ansicht-Gadget" Author="">
+    <Description>Eine OpenStreetMap-Karte für die Benutzerdefinierte Ansicht.</Description>
     <Dependencies>
       <Id>(Base)</Id>
       <Id>WinUI.Base</Id>

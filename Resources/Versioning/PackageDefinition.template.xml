@@ -1,0 +1,11 @@
+<Package>
+  <!-- The identifier of the package. -->
+  <Identifier>YOUR_PACKAGE_IDENTIFIER</Identifier>
+  <!-- List each file that is deployed in here. -->
+  <PackageFiles>
+    <!-- Files that are named here will be installed and uninstalled by the Updater. -->
+    <File>YOUR_FILE.TXT</File>
+    <!-- If you enable "Keep", then the file will not be uninstalled. Use wisely. -->
+    <File Keep="True">YOUR_PERSISTENT_FILE.TXT</File>
+  </PackageFiles>
+</Package>
