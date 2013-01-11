@@ -15,8 +15,9 @@
         <DataGrid x:Name="dgPackages" Grid.Column="0" Margin="2" ItemsSource="{Binding Packages}" CanUserDeleteRows="False" CanUserAddRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Header="" Binding="{Binding IsInstallOrUpdate}" />
-                <DataGridTextColumn Header="Kennung" Binding="{Binding Info.Identifier}" Width="100" IsReadOnly="True" />
+                <DataGridTextColumn Header="Kennung" Binding="{Binding Info.Identifier}" Width="150" IsReadOnly="True" />
                 <DataGridTextColumn Header="Name" Binding="{Binding Info.DisplayName}" Width="200" IsReadOnly="True" />
+                <DataGridTextColumn Header="Kategorie" Binding="{Binding Info.Category}" Width="200" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
         <GridSplitter Grid.Column="0"  Width="3" ResizeDirection="Columns" />
