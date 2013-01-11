@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>WinUI.OV.Custom</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Windows.CustomViewer.dll</File>
+  </PackageFiles>
+</Package>

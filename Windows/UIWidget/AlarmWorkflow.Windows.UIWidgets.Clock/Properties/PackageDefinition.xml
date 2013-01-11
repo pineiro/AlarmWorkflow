@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>WinUI.OV.CustomWidget.Clock</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Windows.UIWidgets.Clock.dll</File>
+  </PackageFiles>
+</Package>

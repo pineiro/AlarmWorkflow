@@ -1,0 +1,8 @@
+<Package>
+  <Identifier>(Base)</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Shared.dll</File>
+    <!-- 3rd-Party -->
+    <File>log4net.dll</File>
+  </PackageFiles>
+</Package>

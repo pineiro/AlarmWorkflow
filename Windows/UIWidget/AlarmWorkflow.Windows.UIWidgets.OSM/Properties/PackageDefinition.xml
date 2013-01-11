@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>WinUI.OV.CustomWidget.OSM</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Windows.UIWidgets.OSM.dll</File>
+  </PackageFiles>
+</Package>

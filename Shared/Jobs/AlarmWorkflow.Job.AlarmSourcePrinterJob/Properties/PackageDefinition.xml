@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>Job.AlarmSourcePrinter</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Job.AlarmSourcePrinterJob.dll</File>
+  </PackageFiles>
+</Package>

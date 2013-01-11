@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>WinUI.OV.CustomWidget.Operation</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Windows.UIWidgets.Operation.dll</File>
+  </PackageFiles>
+</Package>

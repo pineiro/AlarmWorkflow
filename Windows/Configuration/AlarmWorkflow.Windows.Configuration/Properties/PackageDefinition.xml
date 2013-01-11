@@ -1,0 +1,8 @@
+<Package>
+  <Identifier>WinUI.ConfEd</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Windows.Configuration.exe</File>
+    <File>AlarmWorkflow.Windows.Configuration.FaxTypeEditors.dll</File>
+    <File>AlarmWorkflow.Windows.ConfigurationContracts.dll</File>
+  </PackageFiles>
+</Package>

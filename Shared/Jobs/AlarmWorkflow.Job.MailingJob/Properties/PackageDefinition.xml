@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>Job.Mailing</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Job.MailingJob.dll</File>
+  </PackageFiles>
+</Package>

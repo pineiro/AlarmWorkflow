@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>Job.MySqlDatabase</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Job.MySqlDatabaseJob.dll</File>
+  </PackageFiles>
+</Package>

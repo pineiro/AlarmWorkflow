@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>Job.DisplayWakeUp</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Job.DisplayWakeUpJob.dll</File>
+  </PackageFiles>
+</Package>

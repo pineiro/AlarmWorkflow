@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>RoutePlanProvider.GoogleMaps</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.RoutePlanProvider.GoogleMaps.dll</File>
+  </PackageFiles>
+</Package>

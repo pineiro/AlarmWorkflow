@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>Parser.ILSRosenheimParser</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Parser.ILSRosenheimParser.dll</File>
+  </PackageFiles>
+</Package>

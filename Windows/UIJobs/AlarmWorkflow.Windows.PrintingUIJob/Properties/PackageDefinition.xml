@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>WinUI.Job.Printing</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Windows.PrintingUIJob.dll</File>
+  </PackageFiles>
+</Package>

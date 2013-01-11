@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>WinUI.OV.IlsDarmstadt</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Windows.ILSDarmStadtOperationViewer.dll</File>
+  </PackageFiles>
+</Package>

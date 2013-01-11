@@ -1,0 +1,8 @@
+<Package>
+  <Identifier>Job.Prowl</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Job.Prowl.dll</File>
+    <!-- 3-rd party -->
+    <File>Prowl.dll</File>
+  </PackageFiles>
+</Package>

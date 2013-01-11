@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>Parser.ILSOberlandParser</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Parser.ILSOberlandParser.dll</File>
+  </PackageFiles>
+</Package>

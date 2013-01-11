@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>Parser.ILSFFBParser</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Parser.ILSFFBParser.dll</File>
+  </PackageFiles>
+</Package>

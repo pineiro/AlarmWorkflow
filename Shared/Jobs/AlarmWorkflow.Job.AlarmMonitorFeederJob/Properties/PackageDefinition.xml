@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>Job.AlarmMonitorFeeder</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Job.AlarmMonitorFeederJob.dll</File>
+  </PackageFiles>
+</Package>

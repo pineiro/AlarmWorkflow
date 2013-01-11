@@ -168,6 +168,9 @@
     <Resource Include="Resources\DownArrow.png" />
     <Resource Include="Resources\UpArrow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PackageDefinition.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(ProjectDir)Controlfile.xml" "$(ProjectDir)..\..\..\Build\Config\*" /Y

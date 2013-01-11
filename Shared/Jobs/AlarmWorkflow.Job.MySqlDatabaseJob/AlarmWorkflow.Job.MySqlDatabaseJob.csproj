@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MySql.Data.Entity.dll" />
+    <None Include="Properties\PackageDefinition.xml" />
     <EntityDeploy Include="Data\Entities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Entities.Designer.cs</LastGenOutput>

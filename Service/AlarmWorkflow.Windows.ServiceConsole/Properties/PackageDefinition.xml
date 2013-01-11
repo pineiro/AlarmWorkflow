@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>Service.DebugConsole</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Windows.ServiceConsole.exe</File>
+  </PackageFiles>
+</Package>

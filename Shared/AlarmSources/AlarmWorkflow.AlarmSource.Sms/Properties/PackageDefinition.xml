@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>AlarmSource.Sms</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.AlarmSource.Sms.dll</File>
+  </PackageFiles>
+</Package>

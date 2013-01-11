@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>WinUI.OV.IlsAnsbach</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Windows.IlsAnsbachOperationViewer.dll</File>
+  </PackageFiles>
+</Package>

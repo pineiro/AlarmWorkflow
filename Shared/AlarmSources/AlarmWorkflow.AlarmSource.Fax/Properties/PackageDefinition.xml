@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>AlarmSource.Fax</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.AlarmSource.Fax.dll</File>
+  </PackageFiles>
+</Package>

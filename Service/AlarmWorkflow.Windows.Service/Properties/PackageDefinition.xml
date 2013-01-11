@@ -1,0 +1,7 @@
+<Package>
+  <Identifier>Service.WindowsService</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Windows.Service.exe</File>
+    <File>AlarmWorkflow.Windows.ServiceContracts.dll</File>
+  </PackageFiles>
+</Package>

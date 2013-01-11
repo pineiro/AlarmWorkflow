@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>Parser.ILSAnsbachParser</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Parser.ILSAnsbachParser.dll</File>
+  </PackageFiles>
+</Package>

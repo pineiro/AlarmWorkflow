@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>WinUI.Job.ExternalTool</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Windows.ExternalToolUIJob.dll</File>
+  </PackageFiles>
+</Package>

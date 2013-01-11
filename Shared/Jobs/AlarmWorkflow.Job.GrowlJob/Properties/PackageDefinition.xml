@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>Job.Growl</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Job.GrowlJob.dll</File>
+  </PackageFiles>
+</Package>

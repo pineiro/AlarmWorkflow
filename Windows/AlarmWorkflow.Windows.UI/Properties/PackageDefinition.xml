@@ -1,0 +1,7 @@
+<Package>
+  <Identifier>WinUI.Base</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Windows.UI.exe</File>
+    <File>AlarmWorkflow.Windows.UIContracts.dll</File>
+  </PackageFiles>
+</Package>

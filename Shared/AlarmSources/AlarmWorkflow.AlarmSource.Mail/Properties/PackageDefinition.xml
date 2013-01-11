@@ -1,0 +1,8 @@
+<Package>
+  <Identifier>AlarmSource.Mail</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.AlarmSource.Mail.dll</File>
+    <!-- 3rd-Party -->
+    <File>S22.Imap.dll</File>
+  </PackageFiles>
+</Package>

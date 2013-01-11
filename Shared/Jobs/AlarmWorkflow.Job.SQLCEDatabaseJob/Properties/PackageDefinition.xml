@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>Job.SQLCEDatabase</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Job.SQLCEDatabaseJob.dll</File>
+  </PackageFiles>
+</Package>

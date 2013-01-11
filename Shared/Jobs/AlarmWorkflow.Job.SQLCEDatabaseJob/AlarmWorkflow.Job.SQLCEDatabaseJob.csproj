@@ -85,6 +85,7 @@
     <Compile Include="SQLCEDatabaseOperationStore.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PackageDefinition.xml" />
     <Content Include="SQLCEDatabase.sdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
