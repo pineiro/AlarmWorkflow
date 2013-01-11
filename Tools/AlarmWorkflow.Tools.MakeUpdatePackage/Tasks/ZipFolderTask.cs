@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using AlarmWorkflow.Tools.MakeUpdatePackage.Misc;
 using Ionic.Zip;
 
 namespace AlarmWorkflow.Tools.MakeUpdatePackage.Tasks
