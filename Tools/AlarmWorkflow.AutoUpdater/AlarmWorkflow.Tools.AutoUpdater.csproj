@@ -82,6 +82,8 @@
     <Compile Include="Network\LocalFileSystemServerClient.cs" />
     <Compile Include="Network\OpenFireSourceServerClient.cs" />
     <Compile Include="Network\IServerClient.cs" />
+    <Compile Include="Versioning\LocalPackageInfo.cs" />
+    <Compile Include="Versioning\LocalPackageList.cs" />
     <Compile Include="Versioning\PackageDetail.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PackageDisplayItemViewModel.cs" />

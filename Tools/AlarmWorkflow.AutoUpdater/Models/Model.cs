@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Xml.Linq;
+﻿using System.Linq;
 using AlarmWorkflow.Tools.AutoUpdater.Network;
 using AlarmWorkflow.Tools.AutoUpdater.Versioning;
 
@@ -20,6 +19,10 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
         /// Gets the package list, server version.
         /// </summary>
         public ServerPackageList PackageListServer { get; private set; }
+        /// <summary>
+        /// Gets the package list, local version. Defines all packages that are installed on the client.
+        /// </summary>
+        public LocalPackageList PackageListLocal { get; private set; }
 
         #endregion
 
@@ -29,11 +32,12 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
         {
             // Set server client
             var client = new Network.LocalFileSystemServerClient();
-            client.RootFolder = @"F:\AlarmWorkflow\Resources\Versioning\master";
+            client.RootFolder = @"D:\Projects\AlarmWorkflow\Resources\Versioning\master";
 
             this.ServerClient = client;
 
             DownloadServerPackageList();
+            ConstructLocalPackageList();
         }
 
         #endregion
@@ -43,6 +47,30 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
         private void DownloadServerPackageList()
         {
             PackageListServer = ServerPackageList.Create(ServerClient);
+        }
+
+        private void ConstructLocalPackageList()
+        {
+            PackageListLocal = LocalPackageList.Build();
+        }
+
+        internal bool IsUpdateNeeded(string identifier)
+        {
+            LocalPackageInfo pkgLoc = PackageListLocal.Packages.FirstOrDefault(p => p.Identifier == identifier);
+            if (pkgLoc == null)
+            {
+                // Package not installed
+                return false;
+            }
+
+            PackageDetail pkgSrv = PackageListServer.PackageDetails.FirstOrDefault(sp => sp.ParentIdentifier == identifier);
+            if (pkgSrv == null)
+            {
+                // TODO: Log, maybe package is too old or server error.
+                return false;
+            }
+
+            return pkgSrv.GetLatestVersion() > pkgLoc.Version;
         }
 
         #endregion

@@ -32,6 +32,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
                 PackageDisplayItemViewModel vm = new PackageDisplayItemViewModel(this);
                 vm.Info = item;
                 vm.Detail = App.GetApp().Model.PackageListServer.PackageDetails.FirstOrDefault(pd => pd.ParentIdentifier == item.Identifier);
+                vm.NeedsUpdate = App.GetApp().Model.IsUpdateNeeded(item.Identifier);
 
                 Packages.Add(vm);
             }

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using AlarmWorkflow.Tools.AutoUpdater.Versioning;
 using AlarmWorkflow.Windows.UIContracts.ViewModels;
+using System;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
 {
@@ -39,10 +40,18 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
             set { SetIsScheduledForInstallOrUpdate(value, true); }
         }
 
+        public Version LocalPackageVersion
+        {
+            get { return App.GetApp().Model.PackageListLocal.GetLocalVersionOfPackage(Info.Identifier); }
+        }
         /// <summary>
         /// Gets/sets whether or not this item is already installed.
         /// </summary>
-        public bool IsInstalled { get; set; }
+        public bool IsInstalled
+        {
+            get { return LocalPackageVersion != null; }
+        }
+        public bool NeedsUpdate { get; set; }
 
         #endregion
 

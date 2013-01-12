@@ -14,6 +14,7 @@
                 <DataGridTextColumn Header="Kennung" Binding="{Binding Info.Identifier}" Width="150" IsReadOnly="True" />
                 <DataGridTextColumn Header="Name" Binding="{Binding Info.DisplayName}" Width="200" IsReadOnly="True" />
                 <DataGridTextColumn Header="Kategorie" Binding="{Binding Info.Category}" Width="200" IsReadOnly="True" />
+                <DataGridTextColumn Header="Update benötigt?" Binding="{Binding NeedsUpdate}" Width="100" IsReadOnly="True" />
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">

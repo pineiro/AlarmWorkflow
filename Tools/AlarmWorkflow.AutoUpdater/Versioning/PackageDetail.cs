@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
@@ -26,6 +27,11 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
         #endregion
 
         #region Methods
+
+        internal Version GetLatestVersion()
+        {
+            return Versions.OrderByDescending(ve => ve.Version).First().Version;
+        }
 
         internal static PackageDetail FromDocument(XDocument document)
         {
@@ -65,7 +71,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
             {
                 entry.Timestamp = timestamp;
             }
-            
+
             Type type = Type.Regular;
             if (!Enum.TryParse<Type>(versionElement.Element("Type").Value, out type))
             {
