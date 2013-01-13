@@ -19,29 +19,5 @@ namespace AlarmWorkflow.Tools.AutoUpdater
             DialogResult dr = MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             return dr == DialogResult.Yes;
         }
-
-        /// <summary>
-        /// Constructs the Uri to any path that is relative to the server url and is inside the "updates" directory on the server.
-        /// </summary>
-        /// <param name="relativeUriPaths"></param>
-        /// <returns></returns>
-        internal static Uri GetUriOnServer(params string[] relativeUriPaths)
-        {
-            string uri = string.Format("{0}/{1}/{2}",
-                Properties.Settings.Default.UpdateServerName,
-                Properties.Settings.Default.UpdateFilesDirectory,
-                string.Join("/", relativeUriPaths));
-
-            return new Uri(uri, UriKind.Absolute);
-        }
-
-        internal static Stream DownloadFileSync(string uri)
-        {
-            using (WebClient client = new WebClient())
-            {
-                byte[] data = client.DownloadData(GetUriOnServer(Properties.Settings.Default.UpdateServerVersionOldFileName));
-                return new MemoryStream(data);
-            }
-        }
     }
 }

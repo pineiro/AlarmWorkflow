@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using AlarmWorkflow.Tools.AutoUpdater.Models;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
 {
@@ -45,7 +47,10 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
 
         internal static string GetInstalledPackagesDirectory()
         {
-            return Path.Combine(BaselineDefinitions.GetLocalAppDataFolderPath(), LocalPackageList.PathInAppData);
+            // Since we can have multiple installation directories (especially when developing) we hash the assembly dir
+            string asmDirName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string dirName = HashHelper.GetHashOfString(asmDirName);
+            return Path.Combine(BaselineDefinitions.GetLocalAppDataFolderPath(), LocalPackageList.PathInAppData, dirName);
         }
 
         internal static LocalPackageList Build()

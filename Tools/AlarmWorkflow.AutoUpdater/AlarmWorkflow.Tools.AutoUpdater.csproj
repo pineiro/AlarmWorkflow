@@ -78,6 +78,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\HashHelper.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Network\LocalFileSystemServerClient.cs" />
     <Compile Include="Network\OpenFireSourceServerClient.cs" />
@@ -125,6 +126,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

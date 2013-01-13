@@ -28,13 +28,16 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Model"/> class.
+        /// </summary>
         public Model()
         {
             // Set server client
             var client = new Network.LocalFileSystemServerClient();
             client.RootFolder = @"D:\Projects\AlarmWorkflow\Resources\Versioning\master";
 
-            this.ServerClient = client;
+            ServerClient = client;
 
             DownloadServerPackageList();
             ConstructLocalPackageList();

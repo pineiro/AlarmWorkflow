@@ -61,14 +61,40 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Das gewählte Paket kann nicht abgewählt werden. Folgende Pakete haben Abhängigkeiten zu diesem:
-        ///{0}
+        ///   Looks up a localized string similar to Möchten Sie die gewählte Auswahl installieren?.
+        /// </summary>
+        internal static string ApplySelectionQuestionMessage {
+            get {
+                return ResourceManager.GetString("ApplySelectionQuestionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Das gewählte Paket kann nicht abgewählt werden, da andere ausgewählte Pakete Abhängigkeiten zu diesem Paket ausweisen.
         ///
         ///Möchten Sie dieses Paket dennoch abwählen? Alle abhängigen Pakete werden dann automatisch mit abgewählt..
         /// </summary>
         internal static string CannotUnscheduleBecauseOfExistingDependenciesMessage {
             get {
                 return ResourceManager.GetString("CannotUnscheduleBecauseOfExistingDependenciesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konnte den Server unter &apos;{0}&apos; nicht erreichen! Der Fehlercode lautet &apos;{1}&apos;. Versuchen Sie es später erneut..
+        /// </summary>
+        internal static string OpenFireSourceServerPingFailedErrorMessage {
+            get {
+                return ResourceManager.GetString("OpenFireSourceServerPingFailedErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Keine Abhängigkeiten).
+        /// </summary>
+        internal static string PackageHasNoDependenciesListItem {
+            get {
+                return ResourceManager.GetString("PackageHasNoDependenciesListItem", resourceCulture);
             }
         }
         
@@ -93,6 +119,15 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Properties {
         internal static string PackageIsWIPWarningMessage {
             get {
                 return ResourceManager.GetString("PackageIsWIPWarningMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Der Updateserver ist nicht erreichbar! Kann die Paketinformationen nicht herunterladen. Bitte starten Sie den Updater erneut..
+        /// </summary>
+        internal static string UpdateServerIsNotAccessibleErrorMessage {
+            get {
+                return ResourceManager.GetString("UpdateServerIsNotAccessibleErrorMessage", resourceCulture);
             }
         }
     }

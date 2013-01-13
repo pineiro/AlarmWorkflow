@@ -117,11 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApplySelectionQuestionMessage" xml:space="preserve">
+    <value>Möchten Sie die gewählte Auswahl installieren?</value>
+  </data>
   <data name="CannotUnscheduleBecauseOfExistingDependenciesMessage" xml:space="preserve">
-    <value>Das gewählte Paket kann nicht abgewählt werden. Folgende Pakete haben Abhängigkeiten zu diesem:
-{0}
+    <value>Das gewählte Paket kann nicht abgewählt werden, da andere ausgewählte Pakete Abhängigkeiten zu diesem Paket ausweisen.
 
 Möchten Sie dieses Paket dennoch abwählen? Alle abhängigen Pakete werden dann automatisch mit abgewählt.</value>
+  </data>
+  <data name="OpenFireSourceServerPingFailedErrorMessage" xml:space="preserve">
+    <value>Konnte den Server unter '{0}' nicht erreichen! Der Fehlercode lautet '{1}'. Versuchen Sie es später erneut.</value>
+  </data>
+  <data name="PackageHasNoDependenciesListItem" xml:space="preserve">
+    <value>(Keine Abhängigkeiten)</value>
   </data>
   <data name="PackageIsDeprecatedWarningMessage" xml:space="preserve">
     <value>Das gewählte Paket ist gekennzeichnet als "veraltet" (deprecated). Dies bedeutet, dass es sich nicht mehr in aktiver Entwicklung befindet und nur aus Kompatibilitätsgründen noch enthalten ist. Wenn Fragen hierzu bestehen, wenden Sie sich bitte an das AlarmWorkflow-Team. Danke.
@@ -134,5 +142,8 @@ Wenn Sie möchten, können Sie fortfahren.</value>
 Sie sind herzlich eingeladen, dieses Paket zu testen und Fehler bzw. Anregungen an das Team zu senden. 
 
 Wenn Sie möchten, können Sie fortfahren.</value>
+  </data>
+  <data name="UpdateServerIsNotAccessibleErrorMessage" xml:space="preserve">
+    <value>Der Updateserver ist nicht erreichbar! Kann die Paketinformationen nicht herunterladen. Bitte starten Sie den Updater erneut.</value>
   </data>
 </root>
