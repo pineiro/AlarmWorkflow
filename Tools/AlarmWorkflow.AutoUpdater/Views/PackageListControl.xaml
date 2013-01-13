@@ -35,28 +35,29 @@
 
         <!-- Information -->
         <GroupBox Grid.Column="1" Margin="2" Header="Gewählter Eintrag">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
 
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
 
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
 
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-                <!-- Generic part -->
-                <TextBlock Grid.Row="0" Margin="2" Text="Paketinformationen:" FontWeight="Bold" />
-                <TextBlock Grid.Row="1" Margin="2" Text="{Binding ElementName=dgPackages, Path=SelectedItem.Info.Description}" TextWrapping="WrapWithOverflow" />
+                    <!-- Generic part -->
+                    <TextBlock Grid.Row="0" Margin="2" Text="Paketinformationen:" FontWeight="Bold" />
+                    <TextBlock Grid.Row="1" Margin="2" Text="{Binding ElementName=dgPackages, Path=SelectedItem.Info.Description}" TextWrapping="WrapWithOverflow" MinHeight="100" />
 
-                <!-- Recommendation -->
-                <TextBlock Grid.Row="2" Margin="2" Text="Empfehlung:" FontWeight="Bold" />
-                <TextBlock Grid.Row="3" Margin="2">
+                    <!-- Recommendation -->
+                    <TextBlock Grid.Row="2" Margin="2" Text="Empfehlung:" FontWeight="Bold" />
+                    <TextBlock Grid.Row="3" Margin="2">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
@@ -77,11 +78,11 @@
                             <Setter Property="Text" Value="(Kein Paket gewählt)" />
                         </Style>
                     </TextBlock.Style>
-                </TextBlock>
+                    </TextBlock>
 
-                <!-- Package state -->
-                <TextBlock Grid.Row="4" Margin="2" Text="Paketstatus:" FontWeight="Bold" />
-                <TextBlock Grid.Row="5" Margin="2">
+                    <!-- Package state -->
+                    <TextBlock Grid.Row="4" Margin="2" Text="Paketstatus:" FontWeight="Bold" />
+                    <TextBlock Grid.Row="5" Margin="2">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
@@ -103,53 +104,54 @@
                             <Setter Property="Text" Value="(Kein Paket gewählt)" />
                         </Style>
                     </TextBlock.Style>
-                </TextBlock>
+                    </TextBlock>
 
 
-                <!-- Version entry details -->
-                <TextBlock Grid.Row="6" Margin="2" Text="Versionen:" FontWeight="Bold" />
-                <ItemsControl Grid.Row="7" Margin="2" ItemsSource="{Binding ElementName=dgPackages, Path=SelectedItem.Detail.Versions}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Expander Header="{Binding Version}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <!-- 0 + 1 -->
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
+                    <!-- Version entry details -->
+                    <TextBlock Grid.Row="6" Margin="2" Text="Versionen:" FontWeight="Bold" />
+                    <ItemsControl Grid.Row="7" Margin="2" ItemsSource="{Binding ElementName=dgPackages, Path=SelectedItem.Detail.Versions}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Expander Header="{Binding Version}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <!-- 0 + 1 -->
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
 
-                                        <!-- 2 + 3 -->
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
+                                            <!-- 2 + 3 -->
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
 
-                                        <!-- 4 + 5 -->
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
+                                            <!-- 4 + 5 -->
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
 
-                                        <!-- 6 + 7 -->
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
+                                            <!-- 6 + 7 -->
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
 
-                                        <!-- 8 + 9 -->
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
+                                            <!-- 8 + 9 -->
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
 
-                                    <TextBlock Grid.Row="0" Margin="2" Text="Veröffentlicht:" FontWeight="Bold" />
-                                    <TextBlock Grid.Row="1" Margin="2" Text="{Binding Timestamp}" />
+                                        <TextBlock Grid.Row="0" Margin="2" Text="Veröffentlicht:" FontWeight="Bold" />
+                                        <TextBlock Grid.Row="1" Margin="2" Text="{Binding Timestamp}" />
 
-                                    <TextBlock Grid.Row="2" Margin="2" Text="Art:" FontWeight="Bold" />
-                                    <TextBlock Grid.Row="3" Margin="2" Text="{Binding Type}" />
+                                        <TextBlock Grid.Row="2" Margin="2" Text="Art:" FontWeight="Bold" />
+                                        <TextBlock Grid.Row="3" Margin="2" Text="{Binding Type}" />
 
-                                    <TextBlock Grid.Row="4" Margin="2" Text="Änderungen:" FontWeight="Bold" />
-                                    <TextBox Grid.Row="5" Margin="2" Text="{Binding Changelot}" HorizontalScrollBarVisibility="Auto" MaxHeight="100" IsReadOnly="True" />
+                                        <TextBlock Grid.Row="4" Margin="2" Text="Änderungen:" FontWeight="Bold" />
+                                        <TextBox Grid.Row="5" Margin="2" Text="{Binding Changelog}" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" />
 
-                                </Grid>
-                            </Expander>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </Grid>
+                                    </Grid>
+                                </Expander>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </ScrollViewer>
         </GroupBox>
     </Grid>
 </UserControl>

@@ -1,0 +1,12 @@
+<Package>
+  <Identifier>OCR.Tesseract</Identifier>
+  <PackageFiles>
+    <File>tesseract\tesseract.exe</File>
+    <File>tesseract\tessdata\eng.traineddata</File>
+    <File>tesseract\tessdata\configs\quiet</File>
+    <File>tesseract\doc\AUTHORS</File>
+    <File>tesseract\doc\COPYING</File>
+    <File>tesseract\doc\README</File>
+    <File>tesseract\doc\ReleaseNotes</File>
+  </PackageFiles>
+</Package>

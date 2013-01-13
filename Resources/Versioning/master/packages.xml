@@ -233,7 +233,7 @@
     <Dependencies>
       <Id>(Base)</Id>
       <Id>WinUI.Base</Id>
-	  <Id>Parser.IlsAnsbach</Id>
+      <Id>Parser.IlsAnsbach</Id>
     </Dependencies>
   </Package>
   <Package Id="WinUI.OV.ILSDarmstadt" DisplayName="ILS Darmstadt" Category="Alarmdetailansicht" Author="Das AlarmWorkflow-Team">
@@ -283,5 +283,16 @@
       <Id>WinUI.OV.Custom</Id>
     </Dependencies>
   </Package>
-  
+
+  <!-- Misc -->
+  <!-- OCR packages -->
+  <Package Id="OCR.Tesseract" DisplayName="Tesseract-OCR" Category="Texterkennung" Author="Google/Anpassungen vom AlarmWorkflow-Team">
+    <Description>Stellt die Texterkennung "Tesseract" mit Anpassungen vom AW-Team zur Verwendung mit der Fax-Alarmquelle zur Verfügung.</Description>
+    <Dependencies />
+  </Package>
+  <Package Id="OCR.Cuneiform" DisplayName="Cuneiform-OCR" Category="Texterkennung" Author="OpenOCR/Anpassungen vom AlarmWorkflow-Team">
+    <Description>Stellt die Texterkennung "Cuneiform" mit Anpassungen vom AW-Team zur Verwendung mit der Fax-Alarmquelle zur Verfügung.</Description>
+    <Dependencies />
+  </Package>
+
 </PackagesList>
