@@ -40,7 +40,12 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
             set { SetIsScheduledForInstallOrUpdate(value, true); }
         }
 
-        public Version LocalPackageVersion
+        public Version PackageVersionServer
+        {
+            get { return Detail != null ? Detail.GetLatestVersion() : null; }
+        }
+
+        public Version PackageVersionLocal
         {
             get { return App.GetApp().Model.PackageListLocal.GetLocalVersionOfPackage(Info.Identifier); }
         }
@@ -49,7 +54,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
         /// </summary>
         public bool IsInstalled
         {
-            get { return LocalPackageVersion != null; }
+            get { return PackageVersionLocal != null; }
         }
         public bool NeedsUpdate { get; set; }
 

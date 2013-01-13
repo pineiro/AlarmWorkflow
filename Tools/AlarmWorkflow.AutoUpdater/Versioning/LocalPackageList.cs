@@ -51,10 +51,14 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
         internal static LocalPackageList Build()
         {
             List<LocalPackageInfo> tempList = new List<LocalPackageInfo>();
-            foreach (string configFile in Directory.GetFiles(LocalPackageList.GetInstalledPackagesDirectory(), "*." + FileExtension, SearchOption.AllDirectories))
+
+            if (Directory.Exists(LocalPackageList.GetInstalledPackagesDirectory()))
             {
-                LocalPackageInfo info = LocalPackageInfo.Load(configFile);
-                tempList.Add(info);
+                foreach (string configFile in Directory.GetFiles(LocalPackageList.GetInstalledPackagesDirectory(), "*." + FileExtension, SearchOption.AllDirectories))
+                {
+                    LocalPackageInfo info = LocalPackageInfo.Load(configFile);
+                    tempList.Add(info);
+                }
             }
 
             LocalPackageList list = new LocalPackageList();
