@@ -36,6 +36,12 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
             return Versions.OrderByDescending(ve => ve.Version).First().Version;
         }
 
+        /// <summary>
+        /// Parses the <see cref="PackageDetail"/> from the given XML document.
+        /// The versions are then contained in sorted order from newest to oldest.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
         internal static PackageDetail FromDocument(XDocument document)
         {
             List<Entry> tempList = new List<Entry>();

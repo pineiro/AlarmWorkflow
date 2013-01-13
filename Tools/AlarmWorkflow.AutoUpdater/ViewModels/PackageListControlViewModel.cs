@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Input;
 using AlarmWorkflow.Tools.AutoUpdater.Versioning;
 using AlarmWorkflow.Windows.UIContracts.ViewModels;
+using AlarmWorkflow.Tools.AutoUpdater.Models;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
 {
@@ -39,6 +40,11 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
             {
                 return;
             }
+
+            var packagesToUpdate = Packages.Where(p => p.IsScheduledForInstallOrUpdate).Select(p => p.Info.Identifier);
+
+            PackageInstaller installer = new PackageInstaller();
+            installer.Execute(packagesToUpdate);
         }
 
         #endregion

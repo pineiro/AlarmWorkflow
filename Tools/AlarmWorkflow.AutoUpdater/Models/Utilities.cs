@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Net;
+﻿using System.IO;
 using System.Windows.Forms;
 
 namespace AlarmWorkflow.Tools.AutoUpdater
@@ -18,6 +16,21 @@ namespace AlarmWorkflow.Tools.AutoUpdater
             string msg = string.Format(format, args);
             DialogResult dr = MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             return dr == DialogResult.Yes;
+        }
+
+        internal static string GetWorkingDirectory()
+        {
+            return Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        }
+
+        internal static Stream Copy(this Stream source)
+        {
+            source.Position = 0L;
+
+            MemoryStream dest = new MemoryStream();
+            source.CopyTo(dest);
+            dest.Position = 0L;
+            return dest;
         }
     }
 }

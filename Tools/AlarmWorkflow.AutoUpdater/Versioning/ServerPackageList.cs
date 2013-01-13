@@ -129,6 +129,16 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
             list.PackageDetails = new ReadOnlyCollection<PackageDetail>(details);
         }
 
+        private PackageInformation GetPackageFromIdentifier(string identifier)
+        {
+            return Packages.FirstOrDefault(p => p.Identifier == identifier);
+        }
+
+        private PackageDetail GetPackageDetailFromIdentifier(string identifier)
+        {
+            return PackageDetails.FirstOrDefault(p => p.ParentIdentifier == identifier);
+        }
+
         /// <summary>
         /// Returns all direct and indirect dependencies of the package with the given identifier.
         /// </summary>
@@ -136,7 +146,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
         /// <returns></returns>
         internal IEnumerable<string> GetDependenciesOfPackage(string identifier)
         {
-            PackageInformation package = Packages.FirstOrDefault(p => p.Identifier == identifier);
+            PackageInformation package = GetPackageFromIdentifier(identifier);
             if (package == null)
             {
                 yield break;
@@ -150,6 +160,22 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
                     yield return pkgSrvDep;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns all versions of the package, sorted from newest to oldest.
+        /// </summary>
+        /// <param name="identifier"></param>
+        /// <returns></returns>
+        internal IEnumerable<Version> GetVersionsOfPackage(string identifier)
+        {
+            PackageDetail detail = GetPackageDetailFromIdentifier(identifier);
+            if (detail == null)
+            {
+                return null;
+            }
+
+            return detail.Versions.Select(v => v.Version);
         }
 
         #endregion

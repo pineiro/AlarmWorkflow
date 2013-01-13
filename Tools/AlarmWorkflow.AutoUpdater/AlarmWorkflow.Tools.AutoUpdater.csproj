@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Models\HashHelper.cs" />
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\PackageInstaller.cs" />
     <Compile Include="Network\LocalFileSystemServerClient.cs" />
     <Compile Include="Network\OpenFireSourceServerClient.cs" />
     <Compile Include="Network\IServerClient.cs" />
