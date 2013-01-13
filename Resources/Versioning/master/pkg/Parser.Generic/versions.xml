@@ -1,0 +1,25 @@
+<VersionHistory>
+  <Version Version="0.8.2.0" Timestamp="2012-01-01T10:00">
+    <Type>Regular</Type>
+    <Changelog></Changelog>
+  </Version>
+</VersionHistory>
+
+<!--
+  One version is declared as follows:
+  
+  <Version Version="w.x.y.z" Timestamp="">
+    <Type>Regular</Type>
+    <Changelog></Changelog>
+  </Version>
+  
+  "Version" defines the version string of the package.
+  "Timestamp" refers to the date and time of the package.
+  "Type" can be any of:
+  Minor			: A minor package, such as small improvements
+  Regular			: A regular package, contains new features or changes
+  Bugfix			: A bugfix release
+  Critical		: A package that contains fixes to critical bugs - mandatory!
+  "Changelog" contains the plaintext that gives an overview over what has changed.
+
+-->

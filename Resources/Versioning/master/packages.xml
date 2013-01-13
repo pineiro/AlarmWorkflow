@@ -27,7 +27,7 @@
   </Package>
 
   <!-- RoutePlanProviders -->
-  <Package Id="RoutePlanProviders.GoogleMaps" DisplayName="Google Maps Routenplaner" Category="Routenplaner" Author="Das AlarmWorkflow-Team" Recommendation="Essential">
+  <Package Id="RoutePlanProvider.GoogleMaps" DisplayName="Google Maps Routenplaner" Category="Routenplaner" Author="Das AlarmWorkflow-Team" Recommendation="Essential">
     <Description>Stellt Routenplanung mithilfe von Google Maps zur Verfügung.</Description>
     <Dependencies>
       <Id>(Base)</Id>
@@ -42,14 +42,14 @@
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
-  <Package Id="Parser.ILSAllgaeuParser" DisplayName="ILS Allgäu Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
+  <Package Id="Parser.ILSAllgaeu" DisplayName="ILS Allgäu Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
     <Description></Description>
     <Dependencies>
       <Id>(Base)</Id>
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
-  <Package Id="Parser.IlsAnsbach" DisplayName="ILS Ansbach Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
+  <Package Id="Parser.ILSAnsbach" DisplayName="ILS Ansbach Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
     <Description></Description>
     <Dependencies>
       <Id>(Base)</Id>
@@ -175,7 +175,7 @@
       <Id>(Base)</Id>
     </Dependencies>
   </Package>
-  <Package Id="Job.SQLCEDatabaseJob" DisplayName="SQL Compact Edition Datenbank" Category="Job" Author="Das AlarmWorkflow-Team" State="Deprecated">
+  <Package Id="Job.SQLCEDatabase" DisplayName="SQL Compact Edition Datenbank" Category="Job" Author="Das AlarmWorkflow-Team" State="Deprecated">
     <Description>Schreibt die Alarme in eine Microsoft SQL Compact Edition Datenbank. Geeignet, wenn Sie keinen extra Datenbankserver aufsetzen möchten.</Description>
     <Dependencies>
       <Id>(Base)</Id>
@@ -228,7 +228,7 @@
     </Dependencies>
   </Package>
   <!-- UI/OperationViewers -->
-  <Package Id="WinUI.OV.IlsAnsbach" DisplayName="ILS Ansbach" Category="Alarmdetailansicht" Author="Das AlarmWorkflow-Team">
+  <Package Id="WinUI.OV.ILSAnsbach" DisplayName="ILS Ansbach" Category="Alarmdetailansicht" Author="Das AlarmWorkflow-Team">
     <Description>Eine Ansicht für die ILS Ansbach.</Description>
     <Dependencies>
       <Id>(Base)</Id>
@@ -236,7 +236,7 @@
 	  <Id>Parser.IlsAnsbach</Id>
     </Dependencies>
   </Package>
-  <Package Id="WinUI.OV.IlsDarmstadt" DisplayName="ILS Darmstadt" Category="Alarmdetailansicht" Author="Das AlarmWorkflow-Team">
+  <Package Id="WinUI.OV.ILSDarmstadt" DisplayName="ILS Darmstadt" Category="Alarmdetailansicht" Author="Das AlarmWorkflow-Team">
     <Description>Eine Ansicht für die ILS Darmstadt.</Description>
     <Dependencies>
       <Id>(Base)</Id>
@@ -251,7 +251,7 @@
       <Id>WinUI.Base</Id>
     </Dependencies>
   </Package>
-  <Package Id="WinUI.OV.CustomWidget.Clock" DisplayName="Uhr" Category="Benutzerdefinierte Ansicht-Gadget" Author="Das AlarmWorkflow-Team">
+  <Package Id="WinUI.OV.CW.Clock" DisplayName="Uhr" Category="Benutzerdefinierte Ansicht-Gadget" Author="Das AlarmWorkflow-Team">
     <Description>Eine Uhr für die Benutzerdefinierte Ansicht.</Description>
     <Dependencies>
       <Id>(Base)</Id>
@@ -259,7 +259,7 @@
       <Id>WinUI.OV.Custom</Id>
     </Dependencies>
   </Package>
-  <Package Id="WinUI.OV.CustomWidget.GoogleMaps" DisplayName="Google Maps-Karte" Category="Benutzerdefinierte Ansicht-Gadget" Author="Das AlarmWorkflow-Team">
+  <Package Id="WinUI.OV.CW.GoogleMaps" DisplayName="Google Maps-Karte" Category="Benutzerdefinierte Ansicht-Gadget" Author="Das AlarmWorkflow-Team">
     <Description>Eine Google Maps-Karte für die Benutzerdefinierte Ansicht.</Description>
     <Dependencies>
       <Id>(Base)</Id>
@@ -267,7 +267,7 @@
       <Id>WinUI.OV.Custom</Id>
     </Dependencies>
   </Package>
-  <Package Id="WinUI.OV.CustomWidget.Operation" DisplayName="Einsatzdetailliste" Category="Benutzerdefinierte Ansicht-Gadget" Author="Das AlarmWorkflow-Team">
+  <Package Id="WinUI.OV.CW.Operation" DisplayName="Einsatzdetailliste" Category="Benutzerdefinierte Ansicht-Gadget" Author="Das AlarmWorkflow-Team">
     <Description>Einsatzdetailliste für die Benutzerdefinierte Ansicht.</Description>
     <Dependencies>
       <Id>(Base)</Id>
@@ -275,7 +275,7 @@
       <Id>WinUI.OV.Custom</Id>
     </Dependencies>
   </Package>
-  <Package Id="WinUI.OV.CustomWidget.OSM" DisplayName="OpenStreetMap-Karte" Category="Benutzerdefinierte Ansicht-Gadget" Author="Das AlarmWorkflow-Team">
+  <Package Id="WinUI.OV.CW.OSM" DisplayName="OpenStreetMap-Karte" Category="Benutzerdefinierte Ansicht-Gadget" Author="Das AlarmWorkflow-Team">
     <Description>Eine OpenStreetMap-Karte für die Benutzerdefinierte Ansicht.</Description>
     <Dependencies>
       <Id>(Base)</Id>

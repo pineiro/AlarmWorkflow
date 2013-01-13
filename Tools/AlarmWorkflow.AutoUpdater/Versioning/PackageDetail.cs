@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -13,7 +14,10 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
         #region Properties
 
         public string ParentIdentifier { get; set; }
-        public List<Entry> Versions { get; private set; }
+        /// <summary>
+        /// Gets the collection that contains the version entries, with the latest version being at index #0.
+        /// </summary>
+        public ReadOnlyCollection<Entry> Versions { get; private set; }
 
         #endregion
 
@@ -21,7 +25,6 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
 
         private PackageDetail()
         {
-            Versions = new List<Entry>();
         }
 
         #endregion
@@ -35,8 +38,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
 
         internal static PackageDetail FromDocument(XDocument document)
         {
-            PackageDetail svi = new PackageDetail();
-
+            List<Entry> tempList = new List<Entry>();
             foreach (XElement versionElement in document.Root.Elements("Version"))
             {
                 Entry entry = ParseVersionElement(versionElement);
@@ -46,11 +48,11 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
                     continue;
                 }
 
-                svi.Versions.Add(entry);
+                tempList.Add(entry);
             }
 
-            // Sort all versions
-            svi.Versions.Sort();
+            PackageDetail svi = new PackageDetail();
+            svi.Versions = new ReadOnlyCollection<Entry>(tempList.OrderByDescending(ve => ve.Version).ToList());
 
             return svi;
         }

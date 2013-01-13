@@ -8,6 +8,12 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Network
     /// </summary>
     class LocalFileSystemServerClient : IServerClient
     {
+        #region Constants
+
+        private const string VersionsXmlFileName = "versions.xml";
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -31,8 +37,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Network
 
         Stream IServerClient.DownloadPackageDetail(string id)
         {
-            string versionFileName = string.Format("{0}.versions.xml", id);
-            string filePath = Path.Combine(RootFolder, "pkg", versionFileName);
+            string filePath = Path.Combine(RootFolder, "pkg", id, VersionsXmlFileName);
             if (!File.Exists(filePath))
             {
                 return null;
