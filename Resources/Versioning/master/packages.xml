@@ -38,7 +38,6 @@
   <Package Id="Parser.Generic" DisplayName="Universalparser" Category="Parser" Author="Das AlarmWorkflow-Team" State="WIP">
     <Description>Ein Parser, der verwendet werden kann, wenn kein dedizierter Parser für ein Faxformat existiert.</Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
@@ -52,70 +51,60 @@
   <Package Id="Parser.ILSAnsbach" DisplayName="ILS Ansbach Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
     <Description></Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
   <Package Id="Parser.ILSFFBGermering" DisplayName="ILS FFB (Germering) Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
     <Description></Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
   <Package Id="Parser.ILSFFB" DisplayName="ILS FFB Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
     <Description></Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
   <Package Id="Parser.ILSKaiserslautern" DisplayName="ILS Kaiserslautern Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
     <Description></Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
   <Package Id="Parser.ILSOberland" DisplayName="ILS Oberland Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
     <Description></Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
   <Package Id="Parser.ILSRosenheim" DisplayName="ILS Rosenheim Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
     <Description></Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
   <Package Id="Parser.ILSSchweinfurt" DisplayName="ILS Schweinfurt Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
     <Description></Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
   <Package Id="Parser.ILSStraubing" DisplayName="ILS Straubing Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
     <Description></Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
   <Package Id="Parser.ILSTraunstein" DisplayName="ILS Traunstein Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
     <Description></Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
   <Package Id="Parser.MucLand" DisplayName="München Land Parser" Category="Parser" Author="Das AlarmWorkflow-Team">
     <Description></Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
@@ -192,7 +181,6 @@
   <Package Id="Service.DebugConsole" DisplayName="Windows Service Debug Console" Category="Service" Author="Das AlarmWorkflow-Team">
     <Description>Eine Konsolenanwendung, die den Service hostet. Nur für Debuggingzwecke geeignet!</Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>Service.WindowsService</Id>
     </Dependencies>
   </Package>
@@ -208,7 +196,6 @@
   <Package Id="WinUI.ConfEd" DisplayName="Konfigurationseditor" Category="Windows UI" Author="Das AlarmWorkflow-Team" Recommendation="Recommended">
     <Description>Der Konfigurationseditor. Notwendig, um die Einstellungen benutzerfreundlich bearbeiten zu können.</Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>WinUI.Base</Id>
     </Dependencies>
   </Package>
@@ -216,14 +203,12 @@
   <Package Id="WinUI.Job.ExternalTool" DisplayName="Externe Programme" Category="Windows UI" Author="Das AlarmWorkflow-Team">
     <Description>Startet externe Tools bei Alarmeingang.</Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>WinUI.Base</Id>
     </Dependencies>
   </Package>
   <Package Id="WinUI.Job.Printing" DisplayName="Oberflächendruck" Category="Windows UI" Author="Das AlarmWorkflow-Team">
     <Description>Druckt die Windows-Oberfläche bei Alarmgang aus.</Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>WinUI.Base</Id>
     </Dependencies>
   </Package>
@@ -231,15 +216,13 @@
   <Package Id="WinUI.OV.ILSAnsbach" DisplayName="ILS Ansbach" Category="Alarmdetailansicht" Author="Das AlarmWorkflow-Team">
     <Description>Eine Ansicht für die ILS Ansbach.</Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>WinUI.Base</Id>
-      <Id>Parser.IlsAnsbach</Id>
+      <Id>Parser.ILSAnsbach</Id>
     </Dependencies>
   </Package>
   <Package Id="WinUI.OV.ILSDarmstadt" DisplayName="ILS Darmstadt" Category="Alarmdetailansicht" Author="Das AlarmWorkflow-Team">
     <Description>Eine Ansicht für die ILS Darmstadt.</Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>WinUI.Base</Id>
     </Dependencies>
   </Package>
@@ -247,52 +230,47 @@
   <Package Id="WinUI.OV.Custom" DisplayName="Benutzerdefinierte Ansicht" Category="Alarmdetailansicht" Author="Das AlarmWorkflow-Team">
     <Description>Eine Ansicht, die Sie selbst nach Ihren Vorlieben mithilfe von Gadgets anpassen können.</Description>
     <Dependencies>
-      <Id>(Base)</Id>
       <Id>WinUI.Base</Id>
     </Dependencies>
   </Package>
   <Package Id="WinUI.OV.CW.Clock" DisplayName="Uhr" Category="Benutzerdefinierte Ansicht-Gadget" Author="Das AlarmWorkflow-Team">
     <Description>Eine Uhr für die Benutzerdefinierte Ansicht.</Description>
     <Dependencies>
-      <Id>(Base)</Id>
-      <Id>WinUI.Base</Id>
       <Id>WinUI.OV.Custom</Id>
     </Dependencies>
   </Package>
   <Package Id="WinUI.OV.CW.GoogleMaps" DisplayName="Google Maps-Karte" Category="Benutzerdefinierte Ansicht-Gadget" Author="Das AlarmWorkflow-Team">
     <Description>Eine Google Maps-Karte für die Benutzerdefinierte Ansicht.</Description>
     <Dependencies>
-      <Id>(Base)</Id>
-      <Id>WinUI.Base</Id>
       <Id>WinUI.OV.Custom</Id>
     </Dependencies>
   </Package>
   <Package Id="WinUI.OV.CW.Operation" DisplayName="Einsatzdetailliste" Category="Benutzerdefinierte Ansicht-Gadget" Author="Das AlarmWorkflow-Team">
     <Description>Einsatzdetailliste für die Benutzerdefinierte Ansicht.</Description>
     <Dependencies>
-      <Id>(Base)</Id>
-      <Id>WinUI.Base</Id>
       <Id>WinUI.OV.Custom</Id>
     </Dependencies>
   </Package>
   <Package Id="WinUI.OV.CW.OSM" DisplayName="OpenStreetMap-Karte" Category="Benutzerdefinierte Ansicht-Gadget" Author="Das AlarmWorkflow-Team">
     <Description>Eine OpenStreetMap-Karte für die Benutzerdefinierte Ansicht.</Description>
     <Dependencies>
-      <Id>(Base)</Id>
-      <Id>WinUI.Base</Id>
       <Id>WinUI.OV.Custom</Id>
     </Dependencies>
   </Package>
 
   <!-- Misc -->
   <!-- OCR packages -->
-  <Package Id="OCR.Tesseract" DisplayName="Tesseract-OCR" Category="Texterkennung" Author="Google/Anpassungen vom AlarmWorkflow-Team">
+  <Package Id="OCR.Tesseract" DisplayName="Tesseract-OCR" Category="Texterkennung" Author="Google (Anpassungen vom AlarmWorkflow-Team)">
     <Description>Stellt die Texterkennung "Tesseract" mit Anpassungen vom AW-Team zur Verwendung mit der Fax-Alarmquelle zur Verfügung.</Description>
-    <Dependencies />
+    <Dependencies>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
   </Package>
-  <Package Id="OCR.Cuneiform" DisplayName="Cuneiform-OCR" Category="Texterkennung" Author="OpenOCR/Anpassungen vom AlarmWorkflow-Team">
+  <Package Id="OCR.Cuneiform" DisplayName="Cuneiform-OCR" Category="Texterkennung" Author="OpenOCR (Anpassungen vom AlarmWorkflow-Team)">
     <Description>Stellt die Texterkennung "Cuneiform" mit Anpassungen vom AW-Team zur Verwendung mit der Fax-Alarmquelle zur Verfügung.</Description>
-    <Dependencies />
+    <Dependencies>
+      <Id>AlarmSource.Fax</Id>
+    </Dependencies>
   </Package>
 
 </PackagesList>
