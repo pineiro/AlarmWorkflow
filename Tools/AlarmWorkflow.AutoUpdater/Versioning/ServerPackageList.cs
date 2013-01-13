@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 using AlarmWorkflow.Tools.AutoUpdater.Network;
 
@@ -15,6 +16,9 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
         /// Gets the collection containing all server-side available packages.
         /// </summary>
         public ReadOnlyCollection<PackageInformation> Packages { get; private set; }
+        /// <summary>
+        /// Gets the collection containing the details of all packages.
+        /// </summary>
         public ReadOnlyCollection<PackageDetail> PackageDetails { get; private set; }
 
         #endregion
@@ -30,6 +34,11 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
 
         #region Methods
 
+        /// <summary>
+        /// Creates the server package list by accessing the given server.
+        /// </summary>
+        /// <param name="serverClient"></param>
+        /// <returns></returns>
         internal static ServerPackageList Create(IServerClient serverClient)
         {
             ServerPackageList list = new ServerPackageList();
@@ -118,6 +127,29 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
                 }
             }
             list.PackageDetails = new ReadOnlyCollection<PackageDetail>(details);
+        }
+
+        /// <summary>
+        /// Returns all direct and indirect dependencies of the package with the given identifier.
+        /// </summary>
+        /// <param name="identifier"></param>
+        /// <returns></returns>
+        internal IEnumerable<string> GetDependenciesOfPackage(string identifier)
+        {
+            PackageInformation package = Packages.FirstOrDefault(p => p.Identifier == identifier);
+            if (package == null)
+            {
+                yield break;
+            }
+
+            foreach (string dep in package.Dependencies)
+            {
+                yield return dep;
+                foreach (string pkgSrvDep in GetDependenciesOfPackage(dep))
+                {
+                    yield return pkgSrvDep;
+                }
+            }
         }
 
         #endregion

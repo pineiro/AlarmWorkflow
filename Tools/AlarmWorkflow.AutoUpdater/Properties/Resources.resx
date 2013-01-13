@@ -118,10 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CannotUnscheduleBecauseOfExistingDependenciesMessage" xml:space="preserve">
-    <value>Das gewählte Paket kann nicht abgewählt werden. Folgende Pakete haben Abhängigkeiten zu diesem:
-{0}
+    <value>Das gewählte Paket kann nicht abgewählt werden, da andere ausgewählte Pakete Abhängigkeiten zu diesem Paket ausweisen.
 
 Möchten Sie dieses Paket dennoch abwählen? Alle abhängigen Pakete werden dann automatisch mit abgewählt.</value>
+  </data>
+  <data name="PackageHasNoDependenciesListItem" xml:space="preserve">
+    <value>(Keine Abhängigkeiten)</value>
   </data>
   <data name="PackageIsDeprecatedWarningMessage" xml:space="preserve">
     <value>Das gewählte Paket ist gekennzeichnet als "veraltet" (deprecated). Dies bedeutet, dass es sich nicht mehr in aktiver Entwicklung befindet und nur aus Kompatibilitätsgründen noch enthalten ist. Wenn Fragen hierzu bestehen, wenden Sie sich bitte an das AlarmWorkflow-Team. Danke.

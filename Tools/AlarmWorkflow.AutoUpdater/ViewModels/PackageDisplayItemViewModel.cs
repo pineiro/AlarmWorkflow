@@ -2,6 +2,7 @@
 using AlarmWorkflow.Tools.AutoUpdater.Versioning;
 using AlarmWorkflow.Windows.UIContracts.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
 {
@@ -31,6 +32,10 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
         /// Gets/sets the package details.
         /// </summary>
         public PackageDetail Detail { get; set; }
+        /// <summary>
+        /// Gets/sets the display-names of the dependencies that this package has.
+        /// </summary>
+        public IList<string> Dependencies { get; set; }
         /// <summary>
         /// Gets/sets whether or not this item has been selected for install or update.
         /// </summary>
@@ -123,18 +128,16 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
                 {
                     if (interactiveMode)
                     {
-                        string msg = string.Join("\n-", dependenciesOfMe.Select(d => d.Info.DisplayName));
-                        if (!Utilities.ConfirmMessageBox(Properties.Resources.CannotUnscheduleBecauseOfExistingDependenciesMessage, msg))
+                        if (!Utilities.ConfirmMessageBox(Properties.Resources.CannotUnscheduleBecauseOfExistingDependenciesMessage))
                         {
                             return;
                         }
                     }
 
-                    // Disable all packages without notice
+                    // Disable all packages without notice (also handles hierarchy)
                     foreach (var item in dependenciesOfMe)
                     {
-                        item._isScheduledForInstallOrUpdate = false;
-                        item.OnPropertyChanged("IsScheduledForInstallOrUpdate");
+                        item.SetIsScheduledForInstallOrUpdate(false, false);
                     }
                 }
             }
