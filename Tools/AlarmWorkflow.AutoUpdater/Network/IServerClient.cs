@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.Network
 {
@@ -19,5 +20,12 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Network
         /// <param name="id"></param>
         /// <returns></returns>
         Stream DownloadPackageDetail(string id);
+        /// <summary>
+        /// Downloads the specified package's version.
+        /// </summary>
+        /// <param name="id">The identifier of the package to download.</param>
+        /// <param name="version">The version of the package to download.</param>
+        /// <returns>The contents of the downloaded package.</returns>
+        Stream DownloadPackageVersion(string id, Version version);
     }
 }

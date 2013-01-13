@@ -28,9 +28,6 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
 
         #region Constructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Model"/> class.
-        /// </summary>
         public Model()
         {
             // Set server client

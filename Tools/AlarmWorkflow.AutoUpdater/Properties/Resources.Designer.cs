@@ -61,22 +61,14 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Das gewählte Paket kann nicht abgewählt werden, da andere ausgewählte Pakete Abhängigkeiten zu diesem Paket ausweisen.
+        ///   Looks up a localized string similar to Das gewählte Paket kann nicht abgewählt werden. Folgende Pakete haben Abhängigkeiten zu diesem:
+        ///{0}
         ///
         ///Möchten Sie dieses Paket dennoch abwählen? Alle abhängigen Pakete werden dann automatisch mit abgewählt..
         /// </summary>
         internal static string CannotUnscheduleBecauseOfExistingDependenciesMessage {
             get {
                 return ResourceManager.GetString("CannotUnscheduleBecauseOfExistingDependenciesMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to (Keine Abhängigkeiten).
-        /// </summary>
-        internal static string PackageHasNoDependenciesListItem {
-            get {
-                return ResourceManager.GetString("PackageHasNoDependenciesListItem", resourceCulture);
             }
         }
         

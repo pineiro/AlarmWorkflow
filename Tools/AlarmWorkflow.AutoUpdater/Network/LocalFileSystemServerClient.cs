@@ -45,6 +45,18 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Network
             return File.OpenRead(filePath);
         }
 
+        Stream IServerClient.DownloadPackageVersion(string id, System.Version version)
+        {
+            string packageFileName = string.Format("{0}.zip", version.ToString());
+
+            string filePath = Path.Combine(RootFolder, "pkg", id, packageFileName);
+            if (!File.Exists(filePath))
+            {
+                return null;
+            }
+            return File.OpenRead(filePath);
+        }
+
         #endregion
     }
 }
