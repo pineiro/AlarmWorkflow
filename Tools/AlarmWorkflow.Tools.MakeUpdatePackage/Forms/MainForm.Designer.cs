@@ -54,8 +54,9 @@
             this.cboPackageList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPackageList.FormattingEnabled = true;
             this.cboPackageList.Location = new System.Drawing.Point(119, 16);
+            this.cboPackageList.MaxDropDownItems = 20;
             this.cboPackageList.Name = "cboPackageList";
-            this.cboPackageList.Size = new System.Drawing.Size(345, 21);
+            this.cboPackageList.Size = new System.Drawing.Size(511, 21);
             this.cboPackageList.TabIndex = 1;
             // 
             // label2
@@ -86,9 +87,11 @@
             // 
             // txtOutputDirectory
             // 
+            this.txtOutputDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOutputDirectory.Location = new System.Drawing.Point(119, 107);
             this.txtOutputDirectory.Name = "txtOutputDirectory";
-            this.txtOutputDirectory.Size = new System.Drawing.Size(345, 20);
+            this.txtOutputDirectory.Size = new System.Drawing.Size(511, 20);
             this.txtOutputDirectory.TabIndex = 5;
             // 
             // btnCreate
@@ -105,7 +108,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(476, 196);
+            this.ClientSize = new System.Drawing.Size(642, 196);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.txtOutputDirectory);
             this.Controls.Add(this.label3);

@@ -117,17 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="BuildOrder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BuildOrder.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="EnterVersionStringMessage" xml:space="preserve">
-    <value>Please enter the versionstring (x.y.z.w): 1.0.0.0</value>
-  </data>
-  <data name="FileCopyScript" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FileCopyScript.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="ZipFileCreatedUnder" xml:space="preserve">
-    <value>Created package under: {0}</value>
+  <data name="FileNotFoundMessage" xml:space="preserve">
+    <value>The file '{0}' as specified in the package definition was not found. Aborting creation of package.</value>
   </data>
 </root>

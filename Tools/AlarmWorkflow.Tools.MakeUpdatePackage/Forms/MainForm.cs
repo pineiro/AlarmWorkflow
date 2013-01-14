@@ -34,18 +34,6 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Forms
 
         private void btnCreate_Click(object sender, System.EventArgs e)
         {
-            //Context context = new Context();
-            //context.NewVersion = Version.Parse(txtVersion.Text);
-            //context.ProjectRootDirectory = Utilities.GetProjectRootDirectory();
-            //context.InstallerTempDirectory = new DirectoryInfo(txtOutputDirectory.Text);
-            //if (!context.InstallerTempDirectory.Exists)
-            //{
-            //    context.InstallerTempDirectory.Create();
-            //}
-
-            //ITask task = new ZipFolderTask();
-            //task.Execute(context);
-
             PackageDefinition package = _packages.First(p => p.Identifier == cboPackageList.Text);
             string buildDir = Path.Combine(Utilities.GetProjectRootDirectory().FullName, "Build");
             string outDir = Path.Combine(txtOutputDirectory.Text, package.Identifier);
@@ -54,13 +42,25 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Forms
                 Directory.CreateDirectory(outDir);
             }
 
-            using (ZipFile zip = new ZipFile(Path.Combine(outDir, txtVersion.Text + ".zip")))
+            string zipFileName = Path.Combine(outDir, txtVersion.Text + ".zip");
+            if (File.Exists(zipFileName))
             {
-                foreach (var file in package.IncludedFiles)
+                File.Delete(zipFileName);
+            }
+
+            using (ZipFile zip = new ZipFile(zipFileName))
+            {
+                foreach (var fileName in package.IncludedFiles)
                 {
-                    string fileAbs = Path.Combine(buildDir, file.FileName);
-                    Stream fs = File.OpenRead(fileAbs);
-                    zip.AddEntry(file.FileName, fs);
+                    FileInfo file = new FileInfo(Path.Combine(buildDir, fileName.FileName));
+                    if (!file.Exists)
+                    {
+                        Utilities.ShowMessageBox(MessageBoxIcon.Error, Properties.Resources.FileNotFoundMessage, file.FullName);
+                        return;
+                    }
+
+                    Stream fs = file.OpenRead();
+                    zip.AddEntry(fileName.FileName, fs);
                 }
 
                 zip.Save();
