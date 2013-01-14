@@ -19,7 +19,7 @@
       <Id>(Base)</Id>
     </Dependencies>
   </Package>
-  <Package Id="AlarmSource.EMail" DisplayName="E-Mail Alarmquelle" Category="Alarmquelle" Author="Das AlarmWorkflow-Team">
+  <Package Id="AlarmSource.Mail" DisplayName="E-Mail Alarmquelle" Category="Alarmquelle" Author="Das AlarmWorkflow-Team">
     <Description>Wertet eingehende Mails von der Leitstelle aus.</Description>
     <Dependencies>
       <Id>(Base)</Id>
