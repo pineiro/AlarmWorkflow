@@ -1,6 +1,6 @@
 <Package>
   <Identifier>Parser.GenericParser</Identifier>
   <PackageFiles>
-    <File>AlarmWorkflow.Parser.GenericParser.dll</File>
+    <File>AlarmWorkflow.Parser.GenericParser.exe</File>
   </PackageFiles>
 </Package>
