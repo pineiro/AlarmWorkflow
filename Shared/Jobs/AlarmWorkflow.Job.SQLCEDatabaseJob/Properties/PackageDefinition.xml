@@ -2,5 +2,7 @@
   <Identifier>Job.SQLCEDatabase</Identifier>
   <PackageFiles>
     <File>AlarmWorkflow.Job.SQLCEDatabaseJob.dll</File>
+    <!-- Additional files -->
+    <File>SQLCEDatabase.sdf</File>
   </PackageFiles>
 </Package>

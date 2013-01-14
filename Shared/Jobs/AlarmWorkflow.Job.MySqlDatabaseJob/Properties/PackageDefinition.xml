@@ -2,5 +2,8 @@
   <Identifier>Job.MySqlDatabase</Identifier>
   <PackageFiles>
     <File>AlarmWorkflow.Job.MySqlDatabaseJob.dll</File>
+    <!-- 3rd party -->
+    <File>MySql.Data.dll</File>
+    <File>MySql.Data.Entity.dll</File>
   </PackageFiles>
 </Package>

@@ -2,5 +2,8 @@
   <Identifier>WinUI.OV.IlsAnsbach</Identifier>
   <PackageFiles>
     <File>AlarmWorkflow.Windows.IlsAnsbachOperationViewer.dll</File>
+    <!-- Configuration files -->
+    <File>Config\IlsAnsbachOperationViewerConfig.xml</File>
+    <File>Config\IlsAnsbachNeaOperationViewerConfig.xml</File>
   </PackageFiles>
 </Package>
