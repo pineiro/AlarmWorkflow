@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using AlarmWorkflow.Tools.AutoUpdater.Network;
+using System.Diagnostics;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
 {
@@ -49,7 +50,15 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
 
         private static void CreatePackageInformationList(IServerClient serverClient, ServerPackageList list)
         {
-            using (Stream stream = serverClient.DownloadServerPackageList())
+            Stopwatch sw = Stopwatch.StartNew();
+            Stream stream = serverClient.DownloadServerPackageList();
+
+            if (stream == null)
+            {
+                throw new InvalidOperationException("Could not retrieve packages list from server!");
+            }
+
+            using (stream)
             {
                 XDocument document = XDocument.Load(stream);
 
@@ -65,6 +74,9 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
                 }
                 list.Packages = new ReadOnlyCollection<PackageInformation>(packages);
             }
+
+            sw.Stop();
+            Log.Write(Properties.Resources.LogPackageListDownloadedInMs, sw.ElapsedMilliseconds);
         }
 
         private static PackageInformation ParsePackageInformationElement(XElement packageE)
@@ -112,12 +124,15 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
             List<PackageDetail> details = new List<PackageDetail>();
             foreach (PackageInformation package in list.Packages)
             {
-                using (Stream stream = serverClient.DownloadPackageDetail(package.Identifier))
+                Stopwatch sw = Stopwatch.StartNew();
+                Stream stream = serverClient.DownloadPackageDetail(package.Identifier);
+                if (stream == null)
                 {
-                    if (stream == null)
-                    {
-                        continue;
-                    }
+                    continue;
+                }
+
+                using (stream)
+                {
                     XDocument document = XDocument.Load(stream);
 
                     var d = PackageDetail.FromDocument(document);
@@ -125,6 +140,10 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
 
                     details.Add(d);
                 }
+
+                sw.Stop();
+                Log.Write(Properties.Resources.LogPackageDetailDownloadedInMs, package.Identifier, sw.ElapsedMilliseconds);
+
             }
             list.PackageDetails = new ReadOnlyCollection<PackageDetail>(details);
         }

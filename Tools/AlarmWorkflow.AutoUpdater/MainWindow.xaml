@@ -8,9 +8,14 @@
 
         </Menu>
 
-        <Grid>
-            <views:PackageListControl Margin="2" />
-        </Grid>
+        <TabControl TabStripPlacement="Bottom">
+            <TabItem Header="Paketliste">
+                <views:PackageListControl Margin="1" />
+            </TabItem>
+            <TabItem Header="Log">
+                <views:LogControl Margin="1" />
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </Window>
         

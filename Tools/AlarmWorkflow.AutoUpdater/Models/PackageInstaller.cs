@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AlarmWorkflow.Tools.AutoUpdater.Versioning;
+using Ionic.Zip;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.Models
 {
@@ -33,6 +34,10 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
 
         internal void Execute(IEnumerable<string> packagesToUpdate)
         {
+            // 1. Create a backup of the current folder
+            BackupCurrentFolder();
+
+            // 2. Install the packages
             IEnumerable<string> packagesInOrder = DetermineInstallOrder(packagesToUpdate);
             foreach (string package in packagesInOrder)
             {
@@ -40,6 +45,30 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
             }
 
             _model.PackageListLocal.StoreLocalPackageInfos();
+        }
+
+        private void BackupCurrentFolder()
+        {
+            Log.Write(Properties.Resources.LogBackupCurrentDirectoryStart);
+
+            string backupZipFileName = Path.Combine(Utilities.GetWorkingDirectory(), "_CurrentBackup" + DateTime.Now.ToString("yyyMMddhhmmss") + ".zip.bak");
+            using (ZipFile zip = new ZipFile(backupZipFileName))
+            {
+                foreach (var fileName in Directory.GetFiles(Utilities.GetWorkingDirectory(), "*.*", SearchOption.AllDirectories))
+                {
+                    if (fileName.EndsWith(".bak"))
+                    {
+                        continue;
+                    }
+
+                    string fileNameInZip = Path.GetDirectoryName(fileName);
+                    fileNameInZip = fileNameInZip.Replace(Utilities.GetWorkingDirectory(), "");
+                    zip.AddFile(fileName, fileNameInZip);
+                }
+                zip.Save();
+            }
+
+            Log.Write(Properties.Resources.LogBackupCurrentDirectoryFinished, backupZipFileName);
         }
 
         /// <summary>
