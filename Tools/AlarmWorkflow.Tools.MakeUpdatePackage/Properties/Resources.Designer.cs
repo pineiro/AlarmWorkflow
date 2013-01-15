@@ -68,5 +68,14 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Properties {
                 return ResourceManager.GetString("FileNotFoundMessage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No packages selected!.
+        /// </summary>
+        internal static string NoPackagesSelectedMessage {
+            get {
+                return ResourceManager.GetString("NoPackagesSelectedMessage", resourceCulture);
+            }
+        }
     }
 }

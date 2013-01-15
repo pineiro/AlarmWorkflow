@@ -120,4 +120,7 @@
   <data name="FileNotFoundMessage" xml:space="preserve">
     <value>The file '{0}' as specified in the package definition was not found. Aborting creation of package.</value>
   </data>
+  <data name="NoPackagesSelectedMessage" xml:space="preserve">
+    <value>No packages selected!</value>
+  </data>
 </root>

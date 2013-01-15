@@ -34,36 +34,47 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Forms
 
         private void btnCreate_Click(object sender, System.EventArgs e)
         {
-            PackageDefinition package = _packages.First(p => p.Identifier == cboPackageList.Text);
-            string buildDir = Path.Combine(Utilities.GetProjectRootDirectory().FullName, "Build");
-            string outDir = Path.Combine(txtOutputDirectory.Text, package.Identifier);
-            if (!Directory.Exists(outDir))
+            if (clbPackages.CheckedItems.Count == 0)
             {
-                Directory.CreateDirectory(outDir);
+                MessageBox.Show(Properties.Resources.NoPackagesSelectedMessage);
+                return;
             }
 
-            string zipFileName = Path.Combine(outDir, txtVersion.Text + ".zip");
-            if (File.Exists(zipFileName))
+            foreach (var item in clbPackages.CheckedItems.Cast<object>().ToList())
             {
-                File.Delete(zipFileName);
-            }
+                string text = (string)item;
 
-            using (ZipFile zip = new ZipFile(zipFileName))
-            {
-                foreach (var fileName in package.IncludedFiles)
+                PackageDefinition package = _packages.First(p => p.Identifier == text);
+                string buildDir = Path.Combine(Utilities.GetProjectRootDirectory().FullName, "Build");
+                string outDir = Path.Combine(txtOutputDirectory.Text, package.Identifier);
+                if (!Directory.Exists(outDir))
                 {
-                    FileInfo file = new FileInfo(Path.Combine(buildDir, fileName.FileName));
-                    if (!file.Exists)
-                    {
-                        Utilities.ShowMessageBox(MessageBoxIcon.Error, Properties.Resources.FileNotFoundMessage, file.FullName);
-                        return;
-                    }
-
-                    Stream fs = file.OpenRead();
-                    zip.AddEntry(fileName.FileName, fs);
+                    Directory.CreateDirectory(outDir);
                 }
 
-                zip.Save();
+                string zipFileName = Path.Combine(outDir, txtVersion.Text + ".zip");
+                if (File.Exists(zipFileName))
+                {
+                    File.Delete(zipFileName);
+                }
+
+                using (ZipFile zip = new ZipFile(zipFileName))
+                {
+                    foreach (var fileName in package.IncludedFiles)
+                    {
+                        FileInfo file = new FileInfo(Path.Combine(buildDir, fileName.FileName));
+                        if (!file.Exists)
+                        {
+                            Utilities.ShowMessageBox(MessageBoxIcon.Error, Properties.Resources.FileNotFoundMessage, file.FullName);
+                            return;
+                        }
+
+                        Stream fs = file.OpenRead();
+                        zip.AddEntry(fileName.FileName, fs);
+                    }
+
+                    zip.Save();
+                }
             }
         }
 
@@ -85,9 +96,7 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Forms
             }
 
             _packages = new List<PackageDefinition>(_packages.OrderBy(pd => pd.Identifier));
-            cboPackageList.Items.AddRange(_packages.Select(e => e.Identifier).ToArray());
-
-            cboPackageList.SelectedIndex = 0;
+            clbPackages.Items.AddRange(_packages.Select(e => e.Identifier).ToArray());
         }
 
         #endregion
