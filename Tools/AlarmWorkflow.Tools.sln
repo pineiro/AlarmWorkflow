@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmWorkflow.Tools.AutoUpd
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmWorkflow.Tools.MakeUpdatePackage", "AlarmWorkflow.Tools.MakeUpdatePackage\AlarmWorkflow.Tools.MakeUpdatePackage.csproj", "{F8F05784-C8FF-4D59-8162-CFA142C8147B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmWorkflow.Tools.UpdaterDummyPackage", "AlarmWorkflow.Tools.UpdaterDummyPackage\AlarmWorkflow.Tools.UpdaterDummyPackage.csproj", "{74B930B7-71A3-43B0-91D4-A69460D0F970}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -19,6 +21,10 @@ Global
 		{F8F05784-C8FF-4D59-8162-CFA142C8147B}.Debug|x86.Build.0 = Debug|x86
 		{F8F05784-C8FF-4D59-8162-CFA142C8147B}.Release|x86.ActiveCfg = Release|x86
 		{F8F05784-C8FF-4D59-8162-CFA142C8147B}.Release|x86.Build.0 = Release|x86
+		{74B930B7-71A3-43B0-91D4-A69460D0F970}.Debug|x86.ActiveCfg = Debug|x86
+		{74B930B7-71A3-43B0-91D4-A69460D0F970}.Debug|x86.Build.0 = Debug|x86
+		{74B930B7-71A3-43B0-91D4-A69460D0F970}.Release|x86.ActiveCfg = Release|x86
+		{74B930B7-71A3-43B0-91D4-A69460D0F970}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

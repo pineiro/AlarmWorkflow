@@ -1,0 +1,6 @@
+<Package>
+  <Identifier>ZDev.Dummy</Identifier>
+  <PackageFiles>
+    <File>AlarmWorkflow.Tools.UpdaterDummyPackage.dll</File>
+  </PackageFiles>
+</Package>
