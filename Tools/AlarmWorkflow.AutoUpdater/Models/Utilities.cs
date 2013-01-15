@@ -30,6 +30,9 @@ namespace AlarmWorkflow.Tools.AutoUpdater
             MemoryStream dest = new MemoryStream();
             source.CopyTo(dest);
             dest.Position = 0L;
+
+            source.Position = 0L;
+
             return dest;
         }
     }

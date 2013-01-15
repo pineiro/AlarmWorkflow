@@ -15,6 +15,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
         #region Fields
 
         private Model _model;
+        private string _installDirectory;
 
         #endregion
 
@@ -26,6 +27,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
         public PackageInstaller()
         {
             _model = App.GetApp().Model;
+            _installDirectory = Utilities.GetWorkingDirectory();
         }
 
         #endregion
@@ -51,18 +53,19 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
         {
             Log.Write(Properties.Resources.LogBackupCurrentDirectoryStart);
 
-            string backupZipFileName = Path.Combine(Utilities.GetWorkingDirectory(), "_CurrentBackup" + DateTime.Now.ToString("yyyMMddhhmmss") + ".zip.bak");
+            string backupZipFileName = Path.Combine(_installDirectory, "_CurrentBackup" + DateTime.Now.ToString("yyyMMddhhmmss") + ".zip.bak");
             using (ZipFile zip = new ZipFile(backupZipFileName))
             {
-                foreach (var fileName in Directory.GetFiles(Utilities.GetWorkingDirectory(), "*.*", SearchOption.AllDirectories))
+                foreach (var fileName in Directory.GetFiles(_installDirectory, "*.*", SearchOption.AllDirectories))
                 {
-                    if (fileName.EndsWith(".bak"))
+                    if (fileName.EndsWith(".bak") ||
+                        fileName.Contains("AutoUpdaterCache"))
                     {
                         continue;
                     }
 
                     string fileNameInZip = Path.GetDirectoryName(fileName);
-                    fileNameInZip = fileNameInZip.Replace(Utilities.GetWorkingDirectory(), "");
+                    fileNameInZip = fileNameInZip.Replace(_installDirectory, "");
                     zip.AddFile(fileName, fileNameInZip);
                 }
                 zip.Save();
@@ -141,26 +144,33 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
 
         private void InstallPackageUpdate(string identifier, Version version)
         {
-            Stream packageStream = DownloadPackage(identifier, version);
-            // TODO: Error handling (See comment in DownloadPackage())?!
-            if (packageStream == null)
+            using (Stream packageStream = DownloadPackage(identifier, version))
             {
-                return;
+                // TODO: Error handling (See comment in DownloadPackage())?!
+                if (packageStream == null)
+                {
+                    return;
+                }
+
+                // Install the package (using a copy of the stream which we have to manually dispose of)
+                using (Stream zipStreamCopied = packageStream.Copy())
+                {
+                    using (ZipFile zip = ZipFile.Read(zipStreamCopied))
+                    {
+                        zip.ExtractAll(_installDirectory, ExtractExistingFileAction.OverwriteSilently);
+                    }
+                }
+
+                // Add an entry in the local package list
+                LocalPackageList localPackageList = _model.PackageListLocal;
+                localPackageList.StorePackageInCache(identifier, version, packageStream);
+
+                LocalPackageInfo lpiNew = new LocalPackageInfo();
+                lpiNew.Identifier = identifier;
+                lpiNew.Version = version;
+
+                localPackageList.SetLocalPackageInfo(lpiNew);
             }
-
-            // TODO: Install the package (using a copy of the stream)
-
-
-
-            // Add an entry in the local package list
-            LocalPackageList localPackageList = _model.PackageListLocal;
-            localPackageList.StorePackageInCache(identifier, version, packageStream);
-
-            LocalPackageInfo lpiNew = new LocalPackageInfo();
-            lpiNew.Identifier = identifier;
-            lpiNew.Version = version;
-
-            localPackageList.SetLocalPackageInfo(lpiNew);
         }
 
         private Stream DownloadPackage(string identifier, Version version)
