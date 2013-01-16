@@ -128,7 +128,7 @@
       <Id>(Base)</Id>
     </Dependencies>
   </Package>
-  <Package Id="Job.eAlarm" DisplayName="eAlarm Sender" Category="Job" Author="Das AlarmWorkflow-Team">
+  <Package Id="Job.eAlarm" DisplayName="eAlarm Sender" Category="Job" Author="Das AlarmWorkflow-Team" State="Ignored">
     <Description>Sendet eingehende Alarme an die eAlarm-Android App.</Description>
     <Dependencies>
       <Id>(Base)</Id>
@@ -146,7 +146,7 @@
       <Id>(Base)</Id>
     </Dependencies>
   </Package>
-  <Package Id="Job.MySqlDatabase" DisplayName="MySQL Datenbank" Category="Job" Author="Das AlarmWorkflow-Team" IsRecommended="True" Recommendation="Essential">
+  <Package Id="Job.MySqlDatabase" DisplayName="MySQL Datenbank" Category="Job" Author="Das AlarmWorkflow-Team" Recommendation="Essential">
     <Description>Schreibt die Alarme in eine MySQL Datenbank.</Description>
     <Dependencies>
       <Id>(Base)</Id>
