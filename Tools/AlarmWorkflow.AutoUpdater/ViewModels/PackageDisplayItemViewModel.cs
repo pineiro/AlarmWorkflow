@@ -93,19 +93,19 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
                 {
                     switch (this.Info.State)
                     {
-                        case PackageInformation.PackageState.WIP:
+                        case PackageState.WIP:
                             if (!Utilities.ConfirmMessageBox(Properties.Resources.PackageIsWIPWarningMessage))
                             {
                                 return;
                             }
                             break;
-                        case PackageInformation.PackageState.Deprecated:
+                        case PackageState.Deprecated:
                             if (!Utilities.ConfirmMessageBox(Properties.Resources.PackageIsDeprecatedWarningMessage))
                             {
                                 return;
                             }
                             break;
-                        case PackageInformation.PackageState.Active:
+                        case PackageState.Active:
                         default:
                             break;
                     }

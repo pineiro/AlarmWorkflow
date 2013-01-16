@@ -131,6 +131,9 @@ Möchten Sie dieses Paket dennoch abwählen? Alle abhängigen Pakete werden dann
   <data name="LogBackupCurrentDirectoryStart" xml:space="preserve">
     <value>Erstelle Backup der aktuellen Verzeichnisstruktur...</value>
   </data>
+  <data name="LogDuplicateServerPackageDetected" xml:space="preserve">
+    <value>Ignoriere doppeltes Server-Paket mit Id '{0}'.</value>
+  </data>
   <data name="LogPackageDetailDownloadedInMs" xml:space="preserve">
     <value>Paketdetails zu Paket '{0}' erfolgreich geholt und verarbeitet in {1} ms.</value>
   </data>

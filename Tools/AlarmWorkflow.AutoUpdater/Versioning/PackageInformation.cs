@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
@@ -7,17 +8,38 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
     /// Provides information about one package.
     /// </summary>
     [DebuggerDisplay("Id = '{Identifier}', DisplayName = '{DisplayName}'")]
-    class PackageInformation
+    class PackageInformation : IEquatable<PackageInformation>
     {
         #region Properties
 
+        /// <summary>
+        /// Gets/sets the unique identifier of the package.
+        /// </summary>
         public string Identifier { get; set; }
+        /// <summary>
+        /// Gets/sets the display name of the package (for the UI).
+        /// </summary>
         public string DisplayName { get; set; }
+        /// <summary>
+        /// Gets/sets the description of the package.
+        /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// Gets/sets the category of the package.
+        /// </summary>
         public string Category { get; set; }
+        /// <summary>
+        /// Gets/sets the author of the package.
+        /// </summary>        
         public string Author { get; set; }
+        /// <summary>
+        /// Gets/sets the package state.
+        /// </summary>
         public PackageState State { get; set; }
-        public RecommendationType Recommendation { get; set; }
+        /// <summary>
+        /// Gets/sets the package recommendation.
+        /// </summary>
+        public PackageRecommendation Recommendation { get; set; }
         /// <summary>
         /// Gets/sets the dependencies to other packages that this package has.
         /// The list contains the Identifiers of the packages.
@@ -28,6 +50,9 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PackageInformation"/> class.
+        /// </summary>
         internal PackageInformation()
         {
             Dependencies = new List<string>();
@@ -35,39 +60,17 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
 
         #endregion
 
-        #region Nested types
+        #region IEquatable<PackageInformation> Members
 
-        public enum PackageState
+        /// <summary>
+        /// Returns whether or not the other package and this package are informatically equal.
+        /// This is the case if the values of the two <see cref="P:Identifier"/>-properties is the same.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(PackageInformation other)
         {
-            /// <summary>
-            /// Default package state. The package is in active development.
-            /// </summary>
-            Active = 0,
-            /// <summary>
-            /// The package is work in progress (WIP). This means that it is used at one's own risk.
-            /// </summary>
-            WIP = 9,
-            /// <summary>
-            /// The package is deprecated and should not be used intentionally.
-            /// This package is only included to ensure backwards compatibility.
-            /// </summary>
-            Deprecated = 10,
-        }
-
-        public enum RecommendationType
-        {
-            /// <summary>
-            /// No recommendation (default).
-            /// </summary>
-            None = 0,
-            /// <summary>
-            /// The package is essential for functionality.
-            /// </summary>
-            Essential,
-            /// <summary>
-            /// It is recommended to download this package.
-            /// </summary>
-            Recommended,
+            return other.Identifier == this.Identifier;
         }
 
         #endregion

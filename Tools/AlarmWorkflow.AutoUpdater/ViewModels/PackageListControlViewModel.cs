@@ -72,13 +72,13 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
                     }
                     break;
                 case SelectPackagesCommandParameter.Essential:
-                    foreach (var pkg in Packages.Where(p => p.Info.Recommendation == PackageInformation.RecommendationType.Essential))
+                    foreach (var pkg in Packages.Where(p => p.Info.Recommendation == PackageRecommendation.Essential))
                     {
                         pkg.SetIsScheduledForInstallOrUpdate(true, false);
                     }
                     break;
                 case SelectPackagesCommandParameter.Recommended:
-                    foreach (var pkg in Packages.Where(p => p.Info.Recommendation == PackageInformation.RecommendationType.Recommended))
+                    foreach (var pkg in Packages.Where(p => p.Info.Recommendation == PackageRecommendation.Recommended))
                     {
                         pkg.SetIsScheduledForInstallOrUpdate(true, false);
                     }

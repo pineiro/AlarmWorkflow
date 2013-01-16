@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using AlarmWorkflow.Tools.AutoUpdater.Network;
-using System.Diagnostics;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
 {
+    /// <summary>
+    /// Represents the package list that is downloaded from the server.
+    /// </summary>
     class ServerPackageList
     {
         #region Properties
@@ -70,6 +73,17 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
                     {
                         continue;
                     }
+                    // Yield warning and skip if package with duplicate id detected
+                    if (packages.Contains(package))
+                    {
+                        Log.Write(Properties.Resources.LogDuplicateServerPackageDetected, package.Identifier);
+                        continue;
+                    }
+                    if (package.State == PackageState.Ignored)
+                    {
+                        continue;
+                    }
+
                     packages.Add(package);
                 }
                 list.Packages = new ReadOnlyCollection<PackageInformation>(packages);
@@ -99,24 +113,24 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
             return package;
         }
 
-        private static PackageInformation.PackageState ReadPackageState(XElement packageE)
+        private static PackageState ReadPackageState(XElement packageE)
         {
             XAttribute stateA = packageE.Attribute("State");
             if (stateA != null)
             {
-                return (PackageInformation.PackageState)Enum.Parse(typeof(PackageInformation.PackageState), stateA.Value, false);
+                return (PackageState)Enum.Parse(typeof(PackageState), stateA.Value, false);
             }
-            return PackageInformation.PackageState.Active;
+            return PackageState.Active;
         }
 
-        private static PackageInformation.RecommendationType ReadPackageRecommendation(XElement packageE)
+        private static PackageRecommendation ReadPackageRecommendation(XElement packageE)
         {
             XAttribute recA = packageE.Attribute("Recommendation");
             if (recA != null)
             {
-                return (PackageInformation.RecommendationType)Enum.Parse(typeof(PackageInformation.RecommendationType), recA.Value, false);
+                return (PackageRecommendation)Enum.Parse(typeof(PackageRecommendation), recA.Value, false);
             }
-            return PackageInformation.RecommendationType.None;
+            return PackageRecommendation.None;
         }
 
         private static void CreatePackageDetails(IServerClient serverClient, ServerPackageList list)
@@ -165,6 +179,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
         /// <returns></returns>
         internal IEnumerable<string> GetDependenciesOfPackage(string identifier)
         {
+            // TODO: This method doesn't do a duplicate check, meaning that it gives an endless cycle if the package list is poorly constructed!
             PackageInformation package = GetPackageFromIdentifier(identifier);
             if (package == null)
             {
