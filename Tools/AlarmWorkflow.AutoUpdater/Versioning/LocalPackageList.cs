@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
 {
+    /// <summary>
+    /// Contains a list of all locally installed packages.
+    /// </summary>
     class LocalPackageList
     {
         #region Constants
@@ -45,6 +48,34 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
 
         #region Methods
 
+        /// <summary>
+        /// Loads the <see cref="LocalPackageInfo"/>-files from the cache directory and constructs the <see cref="LocalPackageList"/> accordingly.
+        /// </summary>
+        /// <returns></returns>
+        internal static LocalPackageList Build()
+        {
+            LocalPackageList list = new LocalPackageList();
+
+            if (Directory.Exists(InstalledPackagesDir))
+            {
+                foreach (string configFile in Directory.GetFiles(InstalledPackagesDir, "*." + FileExtension, SearchOption.AllDirectories))
+                {
+                    using (FileStream stream = File.OpenRead(configFile))
+                    {
+                        LocalPackageInfo info = LocalPackageInfo.Load(stream);
+                        list._packages.Add(info);
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Convenience method that returns the local version of a given package.
+        /// </summary>
+        /// <param name="identifier">The identifier of the package to return its local version.</param>
+        /// <returns>The local version of the given package. -or- null, if the package was not installed.</returns>
         internal Version GetLocalVersionOfPackage(string identifier)
         {
             LocalPackageInfo info = Packages.FirstOrDefault(p => p.Identifier == identifier);
@@ -66,68 +97,48 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
             if (existing == null)
             {
                 _packages.Add(info);
+                existing = info;
             }
-            else
-            {
-                existing.Version = info.Version;
-            }
+
+            existing.Version = info.Version;
+
+            StoreLocalPackageInfo(existing);
         }
 
-        internal static LocalPackageList Build()
+        private void StoreLocalPackageInfo(LocalPackageInfo info)
         {
-            LocalPackageList list = new LocalPackageList();
-
-            if (Directory.Exists(InstalledPackagesDir))
+            FileInfo infoFile = new FileInfo(Path.Combine(InstalledPackagesDir, info.Identifier + "." + FileExtension));
+            if (!infoFile.Directory.Exists)
             {
-                foreach (string configFile in Directory.GetFiles(InstalledPackagesDir, "*." + FileExtension, SearchOption.AllDirectories))
-                {
-                    LocalPackageInfo info = LocalPackageInfo.Load(configFile);
-                    list._packages.Add(info);
-                }
+                infoFile.Directory.Create();
             }
 
-            return list;
+            using (FileStream stream = infoFile.OpenWrite())
+            {
+                using (Stream source = info.Save())
+                {
+                    source.CopyTo(stream);
+                }
+            }
         }
 
         /// <summary>
-        /// Stores all local package infos on the disk.
+        /// Stores the package data in the local cache.
         /// </summary>
-        internal void StoreLocalPackageInfos()
-        {
-            EnsureAutoUpdaterDirectoriesExists();
-
-            foreach (LocalPackageInfo info in _packages)
-            {
-                string path = Path.Combine(InstalledPackagesDir, info.Identifier + "." + FileExtension);
-                info.Save(path);
-            }
-        }
-
+        /// <param name="identifier">The identifier of the package to store.</param>
+        /// <param name="version">The version of the package to store.</param>
+        /// <param name="data">The data which represents the package to store. The stream is left open after this method exits.</param>
         internal void StorePackageInCache(string identifier, Version version, Stream data)
         {
-            EnsureAutoUpdaterDirectoriesExists();
-
             FileInfo cacheFile = new FileInfo(Path.Combine(InstalledPackagesDir, string.Format("{0}.{1}.cache", identifier, version)));
             if (!cacheFile.Directory.Exists)
             {
                 cacheFile.Directory.Create();
             }
 
-            using (FileStream fs = File.Create(cacheFile.FullName))
+            using (FileStream fs = cacheFile.OpenWrite())
             {
                 data.CopyTo(fs);
-            }
-        }
-
-        private void EnsureAutoUpdaterDirectoriesExists()
-        {
-            if (!Directory.Exists(AutoUpdaterCacheDir))
-            {
-                Directory.CreateDirectory(AutoUpdaterCacheDir);
-            }
-            if (!Directory.Exists(InstalledPackagesDir))
-            {
-                Directory.CreateDirectory(InstalledPackagesDir);
             }
         }
 

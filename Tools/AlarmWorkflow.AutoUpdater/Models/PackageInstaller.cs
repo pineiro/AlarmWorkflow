@@ -45,8 +45,6 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
             {
                 InstallPackage(package);
             }
-
-            _model.PackageListLocal.StoreLocalPackageInfos();
         }
 
         private void BackupCurrentFolder()
@@ -165,10 +163,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
                 LocalPackageList localPackageList = _model.PackageListLocal;
                 localPackageList.StorePackageInCache(identifier, version, packageStream);
 
-                LocalPackageInfo lpiNew = new LocalPackageInfo();
-                lpiNew.Identifier = identifier;
-                lpiNew.Version = version;
-
+                LocalPackageInfo lpiNew = new LocalPackageInfo(identifier, version);
                 localPackageList.SetLocalPackageInfo(lpiNew);
             }
         }
