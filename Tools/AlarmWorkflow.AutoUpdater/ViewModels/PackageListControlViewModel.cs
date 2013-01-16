@@ -6,6 +6,8 @@ using System.Windows.Input;
 using AlarmWorkflow.Tools.AutoUpdater.Versioning;
 using AlarmWorkflow.Windows.UIContracts.ViewModels;
 using AlarmWorkflow.Tools.AutoUpdater.Models;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
 {
@@ -116,6 +118,9 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
 
         private void BuildPackagesListForView()
         {
+            ICollectionView packagesView = CollectionViewSource.GetDefaultView(this.Packages);
+            packagesView.GroupDescriptions.Add(new PropertyGroupDescription("Info.Category"));
+
             foreach (var item in App.GetApp().Model.PackageListServer.Packages)
             {
                 AddVMForPackage(item);
