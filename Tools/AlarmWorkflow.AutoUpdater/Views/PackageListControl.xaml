@@ -45,7 +45,7 @@
                                                     <TextBlock>
                                                         <Run Text="{Binding Name, Mode=OneTime}" FontWeight="Bold" />
                                                         <Run Text=" (" />
-                                                        <TextBlock Text="{Binding ItemCount}"/>
+                                                        <Run Text="{Binding ItemCount, Mode=OneTime}"/>
                                                         <Run Text=" Einträge)" />
                                                     </TextBlock>
                                                 </Expander.Header>

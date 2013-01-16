@@ -47,6 +47,8 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
 
             PackageInstaller installer = new PackageInstaller();
             installer.Execute(packagesToUpdate);
+
+            BuildPackagesListForView();
         }
 
         #endregion
@@ -109,6 +111,10 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
         public PackageListControlViewModel()
         {
             Packages = new ObservableCollection<PackageDisplayItemViewModel>();
+
+            ICollectionView packagesView = CollectionViewSource.GetDefaultView(this.Packages);
+            packagesView.GroupDescriptions.Add(new PropertyGroupDescription("Info.Category"));
+
             BuildPackagesListForView();
         }
 
@@ -118,8 +124,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
 
         private void BuildPackagesListForView()
         {
-            ICollectionView packagesView = CollectionViewSource.GetDefaultView(this.Packages);
-            packagesView.GroupDescriptions.Add(new PropertyGroupDescription("Info.Category"));
+            this.Packages.Clear();
 
             foreach (var item in App.GetApp().Model.PackageListServer.Packages)
             {
