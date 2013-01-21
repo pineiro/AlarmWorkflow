@@ -85,6 +85,9 @@
     <Compile Include="Versioning\LocalPackageInfo.cs" />
     <Compile Include="Versioning\LocalPackageList.cs" />
     <Compile Include="Versioning\PackageDetail.cs" />
+    <Compile Include="Versioning\PackageDetailEntry.cs" />
+    <Compile Include="Versioning\PackageDetailEntryDependency.cs" />
+    <Compile Include="Versioning\PackageDetailEntryType.cs" />
     <Compile Include="Versioning\PackageState.cs" />
     <Compile Include="Versioning\PackageRecommendation.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

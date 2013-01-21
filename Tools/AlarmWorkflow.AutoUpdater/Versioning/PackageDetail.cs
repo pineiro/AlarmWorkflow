@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -9,15 +10,19 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
     /// <summary>
     /// Provides the details of a package (versions, history etc.).
     /// </summary>
+    [DebuggerDisplay("Parent = {ParentIdentifier}, Versions = {Versions.Count}")]
     class PackageDetail
     {
         #region Properties
 
+        /// <summary>
+        /// Gets/sets the identifier of the package that this instance belongs to.
+        /// </summary>
         public string ParentIdentifier { get; set; }
         /// <summary>
         /// Gets the collection that contains the version entries, with the latest version being at index #0.
         /// </summary>
-        public ReadOnlyCollection<Entry> Versions { get; private set; }
+        public ReadOnlyCollection<PackageDetailEntry> Versions { get; private set; }
 
         #endregion
 
@@ -44,10 +49,10 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
         /// <returns></returns>
         internal static PackageDetail FromDocument(XDocument document)
         {
-            List<Entry> tempList = new List<Entry>();
+            List<PackageDetailEntry> tempList = new List<PackageDetailEntry>();
             foreach (XElement versionElement in document.Root.Elements("Version"))
             {
-                Entry entry = ParseVersionElement(versionElement);
+                PackageDetailEntry entry = ParseVersionElement(versionElement);
                 if (entry == null)
                 {
                     // Skip these entries, most likely invalid format
@@ -58,14 +63,14 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
             }
 
             PackageDetail svi = new PackageDetail();
-            svi.Versions = new ReadOnlyCollection<Entry>(tempList.OrderByDescending(ve => ve.Version).ToList());
+            svi.Versions = new ReadOnlyCollection<PackageDetailEntry>(tempList.OrderByDescending(ve => ve.Version).ToList());
 
             return svi;
         }
 
-        private static Entry ParseVersionElement(XElement versionElement)
+        private static PackageDetailEntry ParseVersionElement(XElement versionElement)
         {
-            Entry entry = new Entry();
+            PackageDetailEntry entry = new PackageDetailEntry();
 
             Version version = null;
             if (!Version.TryParse(versionElement.Attribute("Version").Value, out version))
@@ -80,8 +85,8 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
                 entry.Timestamp = timestamp;
             }
 
-            Type type = Type.Regular;
-            if (!Enum.TryParse<Type>(versionElement.Element("Type").Value, out type))
+            PackageDetailEntryType type = PackageDetailEntryType.Regular;
+            if (!Enum.TryParse<PackageDetailEntryType>(versionElement.Element("Type").Value, out type))
             {
                 return null;
             }
@@ -90,28 +95,15 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
             entry.Type = type;
             entry.Changelog = versionElement.Element("Changelog").Value;
 
+            foreach (XElement depE in versionElement.Element("Dependencies").Elements("Dependency"))
+            {
+                PackageDetailEntryDependency dep = new PackageDetailEntryDependency();
+                dep.Identifier = depE.Attribute("To").Value;
+                dep.Version = Version.Parse(depE.Attribute("Version").Value);
+                entry.Dependencies.Add(dep);
+            }
+
             return entry;
-        }
-
-        #endregion
-
-        #region Nested types
-
-        internal class Entry
-        {
-            public Version Version { get; set; }
-            public DateTime Timestamp { get; set; }
-            public Type Type { get; set; }
-            public string Changelog { get; set; }
-        }
-
-        internal enum Type
-        {
-            Regular = 0,
-            Minor,
-            Bugfix,
-            Critical,
-            Major,
         }
 
         #endregion

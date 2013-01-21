@@ -12,6 +12,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
     /// <summary>
     /// Represents the package list that is downloaded from the server.
     /// </summary>
+    [DebuggerDisplay("Packages = {Packages.Count}, PackageDetails = {PackageDetails.Count}")]
     class ServerPackageList
     {
         #region Properties
@@ -149,7 +150,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
                 {
                     XDocument document = XDocument.Load(stream);
 
-                    var d = PackageDetail.FromDocument(document);
+                    PackageDetail d = PackageDetail.FromDocument(document);
                     d.ParentIdentifier = package.Identifier;
 
                     details.Add(d);

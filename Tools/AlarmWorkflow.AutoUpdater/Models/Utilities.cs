@@ -23,6 +23,11 @@ namespace AlarmWorkflow.Tools.AutoUpdater
             return Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         }
 
+        /// <summary>
+        /// Copies the provided stream to a new <see cref="MemoryStream"/>, sets it to position zero and returns it.
+        /// </summary>
+        /// <param name="source">The stream to copy. The stream is returned open and in position zero.</param>
+        /// <returns></returns>
         internal static Stream Copy(this Stream source)
         {
             source.Position = 0L;

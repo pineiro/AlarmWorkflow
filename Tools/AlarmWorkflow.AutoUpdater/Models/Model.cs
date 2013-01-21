@@ -35,8 +35,8 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
         {
             // Set server client
             var client = new Network.LocalFileSystemServerClient();
-            client.RootFolder = @"D:\Projects\AlarmWorkflow\Resources\Versioning\master";
-            //client.RootFolder = @"F:\AlarmWorkflow\Resources\Versioning\master";
+            //client.RootFolder = @"D:\Projects\AlarmWorkflow\Resources\Versioning\master";
+            client.RootFolder = @"F:\AlarmWorkflow\Resources\Versioning\master";
 
             ServerClient = client;
 

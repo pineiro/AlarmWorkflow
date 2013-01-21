@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Xml.Linq;
 
@@ -7,6 +8,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
     /// <summary>
     /// Record of a locally installed package.
     /// </summary>
+    [DebuggerDisplay("Identifier = {Identifier}, Version = {Version}")]
     class LocalPackageInfo
     {
         #region Properties
