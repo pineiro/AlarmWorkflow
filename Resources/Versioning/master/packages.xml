@@ -272,5 +272,11 @@
       <Id>AlarmSource.Fax</Id>
     </Dependencies>
   </Package>
+  
+  <!-- Auto-Updater package -->
+  <Package Id="AutoUpdater.Updater" DisplayName="Auto-Updater" Category="Basis" Author="Das AlarmWorkflow-Team" Recommendation="Recommended">
+    <Description>Auto-Updater-Paket. Muss nach dem Herunterladen manuell in das Verzeichnis, in dem der Updater liegt, entpackt werden.</Description>
+    <Dependencies />
+  </Package>
 
 </PackagesList>

@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <Resource Include="Properties\PackageDefinition.xml" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainWindow.xaml">

@@ -1,0 +1,10 @@
+<!-- 
+        Hint: This package must not have any install/uninstall-scripts! 
+-->
+<Package>
+  <Identifier>AutoUpdater.Updater</Identifier>
+  <PackageFiles>
+    <!-- TODO: Before creating the update package, zip the Updater and Ionic.zip.dll! -->
+    <File>AutoUpdater.zip</File>
+  </PackageFiles>
+</Package>
