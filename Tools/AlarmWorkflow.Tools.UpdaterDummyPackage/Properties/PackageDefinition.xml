@@ -1,5 +1,6 @@
 <Package>
   <Identifier>ZDev.Dummy</Identifier>
+  <InstallerClassFile>../Installer.cs</InstallerClassFile>
   <PackageFiles>
     <File>AlarmWorkflow.Tools.UpdaterDummyPackage.dll</File>
   </PackageFiles>
