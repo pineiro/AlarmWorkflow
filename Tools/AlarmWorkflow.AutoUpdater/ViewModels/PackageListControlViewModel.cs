@@ -46,7 +46,14 @@ namespace AlarmWorkflow.Tools.AutoUpdater.ViewModels
             var packagesToUpdate = Packages.Where(p => p.IsScheduledForInstallOrUpdate).Select(p => p.Info.Identifier);
 
             PackageInstaller installer = new PackageInstaller();
-            installer.Execute(packagesToUpdate);
+            try
+            {
+                installer.Execute(packagesToUpdate);
+            }
+            catch (Exception ex)
+            {
+                Utilities.ShowMessageBox(System.Windows.Forms.MessageBoxIcon.Error, Properties.Resources.InstallationProcessFailedMessage, ex.Message);
+            }
 
             BuildPackagesListForView();
         }

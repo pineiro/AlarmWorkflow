@@ -77,7 +77,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\InstallFailedException.cs" />
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\PackageDownloadException.cs" />
     <Compile Include="Models\PackageInstaller.cs" />
     <Compile Include="Network\LocalFileSystemServerClient.cs" />
     <Compile Include="Network\OpenFireSourceServerClient.cs" />

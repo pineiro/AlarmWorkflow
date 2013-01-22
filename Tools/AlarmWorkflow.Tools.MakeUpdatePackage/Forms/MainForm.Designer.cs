@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtVersion = new System.Windows.Forms.TextBox();
@@ -35,6 +36,10 @@
             this.txtOutputDirectory = new System.Windows.Forms.TextBox();
             this.btnCreate = new System.Windows.Forms.Button();
             this.clbPackages = new System.Windows.Forms.CheckedListBox();
+            this.cmsPackagesList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmSelectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmDeselectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsPackagesList.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -95,12 +100,35 @@
             // clbPackages
             // 
             this.clbPackages.CheckOnClick = true;
+            this.clbPackages.ContextMenuStrip = this.cmsPackagesList;
             this.clbPackages.FormattingEnabled = true;
             this.clbPackages.IntegralHeight = false;
             this.clbPackages.Location = new System.Drawing.Point(119, 19);
             this.clbPackages.Name = "clbPackages";
             this.clbPackages.Size = new System.Drawing.Size(511, 208);
             this.clbPackages.TabIndex = 7;
+            // 
+            // cmsPackagesList
+            // 
+            this.cmsPackagesList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmSelectAll,
+            this.tsmDeselectAll});
+            this.cmsPackagesList.Name = "cmsPackagesList";
+            this.cmsPackagesList.Size = new System.Drawing.Size(134, 48);
+            // 
+            // tsmSelectAll
+            // 
+            this.tsmSelectAll.Name = "tsmSelectAll";
+            this.tsmSelectAll.Size = new System.Drawing.Size(152, 22);
+            this.tsmSelectAll.Text = "&Select all";
+            this.tsmSelectAll.Click += new System.EventHandler(this.tsmSelectAll_Click);
+            // 
+            // tsmDeselectAll
+            // 
+            this.tsmDeselectAll.Name = "tsmDeselectAll";
+            this.tsmDeselectAll.Size = new System.Drawing.Size(152, 22);
+            this.tsmDeselectAll.Text = "&Deselect all";
+            this.tsmDeselectAll.Click += new System.EventHandler(this.tsmDeselectAll_Click);
             // 
             // MainForm
             // 
@@ -119,6 +147,7 @@
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.Text = "Make Update Package";
+            this.cmsPackagesList.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,5 +162,8 @@
         private System.Windows.Forms.TextBox txtOutputDirectory;
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.CheckedListBox clbPackages;
+        private System.Windows.Forms.ContextMenuStrip cmsPackagesList;
+        private System.Windows.Forms.ToolStripMenuItem tsmSelectAll;
+        private System.Windows.Forms.ToolStripMenuItem tsmDeselectAll;
     }
 }

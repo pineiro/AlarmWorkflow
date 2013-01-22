@@ -81,6 +81,28 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Der Installationsvorgang ist gescheitert! Die Fehlermeldung lautet:
+        ///
+        ///{0}
+        ///
+        ///Die Gründe für das Scheitern sind vielfältig. Bitte sehen Sie im Log nach, was der Grund dafür sein kann..
+        /// </summary>
+        internal static string InstallationProcessFailedMessage {
+            get {
+                return ResourceManager.GetString("InstallationProcessFailedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Der Installationsvorgang ist gescheitert. Bitte sehen Sie in der Log nach. Aufgrund von Abhängigkeiten müssen Sie den Vorgang erneut anstoßen..
+        /// </summary>
+        internal static string InstallFailedExceptionMessage {
+            get {
+                return ResourceManager.GetString("InstallFailedExceptionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Backup erstellt unter &apos;{0}&apos;..
         /// </summary>
         internal static string LogBackupCurrentDirectoryFinished {
@@ -135,6 +157,15 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Paket &apos;{0}&apos; (Version {1}) konnte nicht heruntergeladen werden!.
+        /// </summary>
+        internal static string PackageDownloadExceptionMessageFormat {
+            get {
+                return ResourceManager.GetString("PackageDownloadExceptionMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (Keine Abhängigkeiten).
         /// </summary>
         internal static string PackageHasNoDependenciesListItem {
@@ -164,6 +195,42 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Properties {
         internal static string PackageIsWIPWarningMessage {
             get {
                 return ResourceManager.GetString("PackageIsWIPWarningMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Das Paket &apos;{0}&apos; ist auf dem neuesten Stand und benötigt keine Updates..
+        /// </summary>
+        internal static string PackageToInstallNoVersionsMessage {
+            get {
+                return ResourceManager.GetString("PackageToInstallNoVersionsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download ist fehlgeschlagen. Möglicherweise wurde die Verbindung zum Server unterbrochen, oder das Paket existiert nicht auf dem Server. Wenn es möglich ist, wird der Prozess versuchen, weiterzumachen. Die Fehlermeldung lautet: {0}.
+        /// </summary>
+        internal static string PackageVersionDownloadFailedMessage {
+            get {
+                return ResourceManager.GetString("PackageVersionDownloadFailedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lade Paket &apos;{0}&apos; (Version {1}) herunter....
+        /// </summary>
+        internal static string PackageVersionDownloadingMessage {
+            get {
+                return ResourceManager.GetString("PackageVersionDownloadingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download von {0} Bytes erfolgreich!.
+        /// </summary>
+        internal static string PackageVersionDownloadSucceededMessage {
+            get {
+                return ResourceManager.GetString("PackageVersionDownloadSucceededMessage", resourceCulture);
             }
         }
         

@@ -32,6 +32,22 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Forms
 
         #region Event handlers
 
+        private void tsmSelectAll_Click(object sender, System.EventArgs e)
+        {
+            for (int i = 0; i < clbPackages.Items.Count; i++)
+            {
+                clbPackages.SetItemChecked(i, true);
+            }
+        }
+
+        private void tsmDeselectAll_Click(object sender, System.EventArgs e)
+        {
+            for (int i = 0; i < clbPackages.Items.Count; i++)
+            {
+                clbPackages.SetItemChecked(i, false);
+            }
+        }
+
         private void btnCreate_Click(object sender, System.EventArgs e)
         {
             if (clbPackages.CheckedItems.Count == 0)
@@ -40,41 +56,46 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Forms
                 return;
             }
 
-            foreach (var item in clbPackages.CheckedItems.Cast<object>().ToList())
+            foreach (object item in clbPackages.CheckedItems.Cast<object>().ToList())
             {
-                string text = (string)item;
+                string packageIdentifier = (string)item;
+                CreatePackage(packageIdentifier);
+            }
+        }
 
-                PackageDefinition package = _packages.First(p => p.Identifier == text);
-                string buildDir = Path.Combine(Utilities.GetProjectRootDirectory().FullName, "Build");
-                string outDir = Path.Combine(txtOutputDirectory.Text, package.Identifier);
-                if (!Directory.Exists(outDir))
-                {
-                    Directory.CreateDirectory(outDir);
-                }
+        private void CreatePackage(string packageIdentifier)
+        {
+            PackageDefinition package = _packages.First(p => p.Identifier == packageIdentifier);
 
-                string zipFileName = Path.Combine(outDir, txtVersion.Text + ".zip");
-                if (File.Exists(zipFileName))
-                {
-                    File.Delete(zipFileName);
-                }
+            string buildDir = Path.Combine(Utilities.GetProjectRootDirectory().FullName, "Build");
+            string outDir = Path.Combine(txtOutputDirectory.Text, package.Identifier);
+            if (!Directory.Exists(outDir))
+            {
+                Directory.CreateDirectory(outDir);
+            }
 
-                using (ZipFile zip = new ZipFile(zipFileName))
+            string zipFileName = Path.Combine(outDir, txtVersion.Text + ".zip");
+            if (File.Exists(zipFileName))
+            {
+                File.Delete(zipFileName);
+            }
+
+            using (ZipFile zip = new ZipFile(zipFileName))
+            {
+                foreach (var fileName in package.IncludedFiles)
                 {
-                    foreach (var fileName in package.IncludedFiles)
+                    FileInfo file = new FileInfo(Path.Combine(buildDir, fileName.FileName));
+                    if (!file.Exists)
                     {
-                        FileInfo file = new FileInfo(Path.Combine(buildDir, fileName.FileName));
-                        if (!file.Exists)
-                        {
-                            Utilities.ShowMessageBox(MessageBoxIcon.Error, Properties.Resources.FileNotFoundMessage, file.FullName);
-                            return;
-                        }
-
-                        Stream fs = file.OpenRead();
-                        zip.AddEntry(fileName.FileName, fs);
+                        Utilities.ShowMessageBox(MessageBoxIcon.Error, Properties.Resources.FileNotFoundMessage, file.FullName);
+                        return;
                     }
 
-                    zip.Save();
+                    Stream fs = file.OpenRead();
+                    zip.AddEntry(fileName.FileName, fs);
                 }
+
+                zip.Save();
             }
         }
 

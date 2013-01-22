@@ -28,20 +28,12 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Network
         Stream IServerClient.DownloadServerPackageList()
         {
             string filePath = Path.Combine(RootFolder, Properties.Settings.Default.PackagesListFileName);
-            if (!File.Exists(filePath))
-            {
-                return null;
-            }
             return File.OpenRead(filePath);
         }
 
         Stream IServerClient.DownloadPackageDetail(string id)
         {
             string filePath = Path.Combine(RootFolder, "pkg", id, VersionsXmlFileName);
-            if (!File.Exists(filePath))
-            {
-                return null;
-            }
             return File.OpenRead(filePath);
         }
 
@@ -50,10 +42,6 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Network
             string packageFileName = string.Format("{0}.zip", version.ToString());
 
             string filePath = Path.Combine(RootFolder, "pkg", id, packageFileName);
-            if (!File.Exists(filePath))
-            {
-                return null;
-            }
             return File.OpenRead(filePath);
         }
 

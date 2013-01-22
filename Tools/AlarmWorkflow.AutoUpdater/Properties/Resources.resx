@@ -125,6 +125,9 @@
 
 Möchten Sie dieses Paket dennoch abwählen? Alle abhängigen Pakete werden dann automatisch mit abgewählt.</value>
   </data>
+  <data name="InstallFailedExceptionMessage" xml:space="preserve">
+    <value>Der Installationsvorgang ist gescheitert. Bitte sehen Sie in der Log nach. Aufgrund von Abhängigkeiten müssen Sie den Vorgang erneut anstoßen.</value>
+  </data>
   <data name="LogBackupCurrentDirectoryFinished" xml:space="preserve">
     <value>Backup erstellt unter '{0}'.</value>
   </data>
@@ -143,6 +146,9 @@ Möchten Sie dieses Paket dennoch abwählen? Alle abhängigen Pakete werden dann
   <data name="OpenFireSourceServerPingFailedErrorMessage" xml:space="preserve">
     <value>Konnte den Server unter '{0}' nicht erreichen! Der Fehlercode lautet '{1}'. Versuchen Sie es später erneut.</value>
   </data>
+  <data name="PackageDownloadExceptionMessageFormat" xml:space="preserve">
+    <value>Paket '{0}' (Version {1}) konnte nicht heruntergeladen werden!</value>
+  </data>
   <data name="PackageHasNoDependenciesListItem" xml:space="preserve">
     <value>(Keine Abhängigkeiten)</value>
   </data>
@@ -158,7 +164,26 @@ Sie sind herzlich eingeladen, dieses Paket zu testen und Fehler bzw. Anregungen 
 
 Wenn Sie möchten, können Sie fortfahren.</value>
   </data>
+  <data name="PackageToInstallNoVersionsMessage" xml:space="preserve">
+    <value>Das Paket '{0}' ist auf dem neuesten Stand und benötigt keine Updates.</value>
+  </data>
+  <data name="PackageVersionDownloadFailedMessage" xml:space="preserve">
+    <value>Download ist fehlgeschlagen. Möglicherweise wurde die Verbindung zum Server unterbrochen, oder das Paket existiert nicht auf dem Server. Wenn es möglich ist, wird der Prozess versuchen, weiterzumachen. Die Fehlermeldung lautet: {0}</value>
+  </data>
+  <data name="PackageVersionDownloadingMessage" xml:space="preserve">
+    <value>Lade Paket '{0}' (Version {1}) herunter...</value>
+  </data>
+  <data name="PackageVersionDownloadSucceededMessage" xml:space="preserve">
+    <value>Download von {0} Bytes erfolgreich!</value>
+  </data>
   <data name="UpdateServerIsNotAccessibleErrorMessage" xml:space="preserve">
     <value>Der Updateserver ist nicht erreichbar! Kann die Paketinformationen nicht herunterladen. Bitte starten Sie den Updater erneut.</value>
+  </data>
+  <data name="InstallationProcessFailedMessage" xml:space="preserve">
+    <value>Der Installationsvorgang ist gescheitert! Die Fehlermeldung lautet:
+
+{0}
+
+Die Gründe für das Scheitern sind vielfältig. Bitte sehen Sie im Log nach, was der Grund dafür sein kann.</value>
   </data>
 </root>

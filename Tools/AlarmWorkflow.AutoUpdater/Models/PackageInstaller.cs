@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using AlarmWorkflow.Tools.AutoUpdater.Versioning;
@@ -34,16 +35,28 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
 
         #region Methods
 
-        internal void Execute(IEnumerable<string> packagesToUpdate)
+        /// <summary>
+        /// Installs/updates the given packages.
+        /// </summary>
+        /// <param name="packagesToUpdate">The names of the packages to install/update.</param>
+        /// <exception cref="InstallFailedException">Thrown if the installation process has failed, usually due to missing packages.</exception>
+        public void Execute(IEnumerable<string> packagesToUpdate)
         {
             // 1. Create a backup of the current folder
             BackupCurrentFolder();
 
             // 2. Install the packages
-            IEnumerable<string> packagesInOrder = DetermineInstallOrder(packagesToUpdate);
-            foreach (string package in packagesInOrder)
+            IEnumerable<CalculatedPackageOrderInfo> packagesInOrder = DetermineInstallOrder(packagesToUpdate);
+            foreach (CalculatedPackageOrderInfo package in packagesInOrder)
             {
-                InstallPackage(package);
+                try
+                {
+                    InstallPackage(package);
+                }
+                catch (PackageDownloadException ex)
+                {
+                    throw new InstallFailedException(ex);
+                }
             }
         }
 
@@ -77,7 +90,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
         /// </summary>
         /// <param name="packagesToUpdate"></param>
         /// <returns></returns>
-        private IEnumerable<string> DetermineInstallOrder(IEnumerable<string> packagesToUpdate)
+        private IEnumerable<CalculatedPackageOrderInfo> DetermineInstallOrder(IEnumerable<string> packagesToUpdate)
         {
             Dictionary<string, int> depTmp = new Dictionary<string, int>();
             // Add all packages in existence to avoid KeyNotFoundExceptions
@@ -110,11 +123,14 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
             depOrder.Sort((f, n) => f.Value.CompareTo(n.Value));
             depOrder.Reverse();
 
-            return depOrder.Select(kvp => kvp.Key);
+            // When setting the dependency count, subtract 1 because the count is one-based and we need it zero-based for convenience.
+            return depOrder.Select(kvp => new CalculatedPackageOrderInfo(kvp.Key, kvp.Value - 1));
         }
 
-        private void InstallPackage(string packageIdentifier)
+        private void InstallPackage(CalculatedPackageOrderInfo info)
         {
+            string packageIdentifier = info.Package;
+
             // Fetch available versions (sorted from newest to oldest so we need to revert)
             IEnumerable<Version> versionsAvailableOnServer = _model.PackageListServer.GetVersionsOfPackage(packageIdentifier).Reverse();
 
@@ -134,22 +150,34 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
                 versionsToInstall.AddRange(versionsAvailableOnServer.Where(v => v > localVersion));
             }
 
-            foreach (Version version in versionsToInstall)
+            if (versionsToInstall.Count == 0)
             {
-                InstallPackageUpdate(packageIdentifier, version);
+                Log.Write(Properties.Resources.PackageToInstallNoVersionsMessage, packageIdentifier);
+            }
+            else
+            {
+                foreach (Version version in versionsToInstall)
+                {
+                    try
+                    {
+                        InstallPackageUpdate(info, version);
+                    }
+                    catch (PackageDownloadException ex)
+                    {
+                        // If this fail is fatal, cancel the whole process. Otherwise continue.
+                        if (ex.IsFatalFail)
+                        {
+                            throw ex;
+                        }
+                    }
+                }
             }
         }
 
-        private void InstallPackageUpdate(string identifier, Version version)
+        private void InstallPackageUpdate(CalculatedPackageOrderInfo info, Version version)
         {
-            using (Stream packageStream = DownloadPackage(identifier, version))
+            using (Stream packageStream = DownloadPackage(info, version))
             {
-                // TODO: Error handling (See comment in DownloadPackage())?!
-                if (packageStream == null)
-                {
-                    return;
-                }
-
                 // Install the package (using a copy of the stream which we have to manually dispose of)
                 using (Stream zipStreamCopied = packageStream.Copy())
                 {
@@ -159,26 +187,74 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
                     }
                 }
 
+                string package = info.Package;
+
                 // Add an entry in the local package list
                 LocalPackageList localPackageList = _model.PackageListLocal;
-                localPackageList.StorePackageInCache(identifier, version, packageStream);
+                localPackageList.StorePackageInCache(package, version, packageStream);
 
-                LocalPackageInfo lpiNew = new LocalPackageInfo(identifier, version);
+                LocalPackageInfo lpiNew = new LocalPackageInfo(package, version);
                 localPackageList.SetLocalPackageInfo(lpiNew);
             }
         }
 
-        private Stream DownloadPackage(string identifier, Version version)
+        /// <summary>
+        /// Downloads a file using the server client.
+        /// </summary>
+        /// <param name="identifier">The package.</param>
+        /// <param name="version">The concrete version of the package to download.</param>
+        /// <returns>A stream containing the downloaded file.</returns>
+        /// <exception cref="PackageDownloadException">Download of the package has failed.</exception>
+        private Stream DownloadPackage(CalculatedPackageOrderInfo info, Version version)
         {
+            string package = info.Package;
             try
             {
-                return _model.ServerClient.DownloadPackageVersion(identifier, version);
+                Log.Write(Properties.Resources.PackageVersionDownloadingMessage, package, version);
+
+                Stream stream = _model.ServerClient.DownloadPackageVersion(package, version);
+
+                Log.Write(Properties.Resources.PackageVersionDownloadSucceededMessage, stream.Length);
+
+                return stream;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // TODO: Rethrow exception? Technically this would be best (no one knows if the following packages are ok at all then)...
+                Log.Write(Properties.Resources.PackageVersionDownloadFailedMessage, ex.Message);
+
+                // Determine whether a fail in downloading this package is fatal.
+                // A fail is considered non-fatal if no other package has dependencies to this package.
+                // Otherwise a fail is always fatal, because other packages rely on this one and when it is missing they may not work.
+                bool isFatalFail = info.HasDependencies;
+                
+                PackageDownloadException exception = new PackageDownloadException(package, version, ex);
+                exception.IsFatalFail = isFatalFail;
+                throw exception;
             }
-            return null;
+        }
+
+        #endregion
+
+        #region Nested types
+
+        /// <summary>
+        /// Helper class that stores whether or not a package has dependencies to other packages.
+        /// </summary>
+        [DebuggerDisplay("{Package}, Dependencies = {DependencyCount}")]
+        class CalculatedPackageOrderInfo
+        {
+            internal string Package { get; set; }
+            internal int DependencyCount { get; set; }
+            internal bool HasDependencies
+            {
+                get { return DependencyCount > 0; }
+            }
+
+            internal CalculatedPackageOrderInfo(string package, int dependencyCount)
+            {
+                Package = package;
+                DependencyCount = dependencyCount;
+            }
         }
 
         #endregion
