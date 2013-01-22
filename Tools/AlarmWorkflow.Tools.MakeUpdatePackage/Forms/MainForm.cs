@@ -1,13 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using AlarmWorkflow.Tools.MakeUpdatePackage.Misc;
 using Ionic.Zip;
+using Microsoft.CSharp;
 
 namespace AlarmWorkflow.Tools.MakeUpdatePackage.Forms
 {
+    /// <summary>
+    /// Interaction logic for the MainForm.
+    /// </summary>
     public partial class MainForm : Form
     {
         #region Fields
@@ -18,6 +24,9 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Forms
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainForm"/> class.
+        /// </summary>
         public MainForm()
         {
             _packages = new List<PackageDefinition>();
@@ -61,6 +70,8 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Forms
                 string packageIdentifier = (string)item;
                 CreatePackage(packageIdentifier);
             }
+
+            MessageBox.Show("Package(s) created!");
         }
 
         private void CreatePackage(string packageIdentifier)
@@ -95,7 +106,56 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Forms
                     zip.AddEntry(fileName.FileName, fs);
                 }
 
+                // When done, create the installer assembly
+                CreateInstallerAssembly(package, zip);
+
                 zip.Save();
+            }
+        }
+
+        private void CreateInstallerAssembly(PackageDefinition package, ZipFile zip)
+        {
+            if (string.IsNullOrWhiteSpace(package.InstallerClassFile))
+            {
+                return;
+            }
+
+            string classFile = Path.Combine(package.SourceFile.DirectoryName, package.InstallerClassFile);
+            if (!File.Exists(classFile))
+            {
+                return;
+            }
+
+            using (CSharpCodeProvider compiler = new CSharpCodeProvider())
+            {
+                CompilerParameters options = new CompilerParameters();
+                options.OutputAssembly = Path.GetTempFileName();
+                options.ReferencedAssemblies.Add("System.dll");
+                options.ReferencedAssemblies.Add("System.Data.dll");
+                options.ReferencedAssemblies.Add("System.Windows.Forms.dll");
+                options.ReferencedAssemblies.Add("System.Xml.dll");
+                options.ReferencedAssemblies.Add("System.Xml.Linq.dll");
+
+                string source = File.ReadAllText(classFile);
+
+                var results = compiler.CompileAssemblyFromSource(options, source);
+                if (results.Errors.HasErrors)
+                {
+
+                }
+                else if (results.Errors.HasWarnings)
+                {
+
+                }
+
+                using (FileStream stream = File.OpenRead(results.PathToAssembly))
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        stream.CopyTo(ms);
+                        zip.AddEntry("$Installer$.dll", ms.ToArray());
+                    }
+                }
             }
         }
 
@@ -112,6 +172,13 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Forms
                     XDocument doc = XDocument.Load(stream);
 
                     PackageDefinition pd = PackageDefinition.Parse(doc);
+                    if (pd == null)
+                    {
+                        Debug.WriteLine("Could not load package definition {0}. Please see log for further information.", file.FullName);
+                        continue;
+                    }
+
+                    pd.SourceFile = file;
                     _packages.Add(pd);
                 }
             }

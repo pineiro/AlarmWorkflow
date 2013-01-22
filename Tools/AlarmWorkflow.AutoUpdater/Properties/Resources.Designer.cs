@@ -175,6 +175,24 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alle Dateien wurden extrahiert..
+        /// </summary>
+        internal static string PackageInstallAllFilesExtractedMessage {
+            get {
+                return ResourceManager.GetString("PackageInstallAllFilesExtractedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lokale Paketversionsinformation aktualisiert..
+        /// </summary>
+        internal static string PackageInstallUpdatedLocalVersionsConfig {
+            get {
+                return ResourceManager.GetString("PackageInstallUpdatedLocalVersionsConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Das gewählte Paket ist gekennzeichnet als &quot;veraltet&quot; (deprecated). Dies bedeutet, dass es sich nicht mehr in aktiver Entwicklung befindet und nur aus Kompatibilitätsgründen noch enthalten ist. Wenn Fragen hierzu bestehen, wenden Sie sich bitte an das AlarmWorkflow-Team. Danke.
         ///
         ///Wenn Sie möchten, können Sie fortfahren..

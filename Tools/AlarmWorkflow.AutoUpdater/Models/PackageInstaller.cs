@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using AlarmWorkflow.Tools.AutoUpdater.Versioning;
 using Ionic.Zip;
+using System.Reflection;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.Models
 {
@@ -183,18 +184,104 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
                 {
                     using (ZipFile zip = ZipFile.Read(zipStreamCopied))
                     {
-                        zip.ExtractAll(_installDirectory, ExtractExistingFileAction.OverwriteSilently);
+                        ExtractZipFileAndRunInstallScript(zip, version);
                     }
                 }
 
-                string package = info.Package;
+                Log.Write(Properties.Resources.PackageInstallAllFilesExtractedMessage);
 
                 // Add an entry in the local package list
+                string package = info.Package;
                 LocalPackageList localPackageList = _model.PackageListLocal;
                 localPackageList.StorePackageInCache(package, version, packageStream);
 
                 LocalPackageInfo lpiNew = new LocalPackageInfo(package, version);
                 localPackageList.SetLocalPackageInfo(lpiNew);
+
+                Log.Write(Properties.Resources.PackageInstallUpdatedLocalVersionsConfig);
+            }
+        }
+
+        private void ExtractZipFileAndRunInstallScript(ZipFile zip, Version version)
+        {
+            foreach (ZipEntry entry in zip.EntriesSorted)
+            {
+                if (entry.FileName == "$Installer$.dll")
+                {
+                    RunInstallScript(entry, version);
+                    continue;
+                }
+
+                entry.Extract(_installDirectory, ExtractExistingFileAction.OverwriteSilently);
+            }
+        }
+
+        private void RunInstallScript(ZipEntry entry, Version version)
+        {
+            try
+            {
+                RunInstallScriptWithFail(entry, version);
+            }
+            catch (TypeLoadException)
+            {
+                // Could not find the installer type.
+                // TODO: Fail package install?
+            }
+            catch (Exception)
+            {
+                // TODO
+
+                throw;
+            }
+        }
+
+        private void RunInstallScriptWithFail(ZipEntry entry, Version version)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                entry.Extract(stream);
+
+                // Load assembly, and find type
+                Assembly installerAssembly = Assembly.Load(stream.ToArray());
+
+                Type type = installerAssembly.GetType("Installer", true);
+                MethodInfo onInstallMethod = type.GetMethod("OnInstall", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+                // Create arguments
+                string inInstallDirectory = _installDirectory;
+                Version inOldVersion = null;    // < TODO
+                Version inNewVersion = version;
+                string[] returnValue = null;
+
+                // Instantiate the class and invoke method
+                object installerClass = Activator.CreateInstance(type, true);
+
+                returnValue = (string[])onInstallMethod.Invoke(installerClass, new object[3] { inInstallDirectory, inOldVersion, inNewVersion });
+                if (returnValue != null && returnValue.Length > 0)
+                {
+                    foreach (string logEntry in returnValue)
+                    {
+                        if (logEntry.Length <= 1)
+                        {
+                            continue;
+                        }
+
+                        char typeId = logEntry.First();
+                        switch (typeId)
+                        {
+                            case 'i':
+                                break;
+                            case 'w':
+                                break;
+                            case 'e':
+                                break;
+                            default:
+                                break;
+                        }
+
+                        Log.Write("Nachricht von Installer-Modul [{0}]: {1}", typeId, logEntry.Remove(0, 1));
+                    }
+                }
             }
         }
 
@@ -226,7 +313,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Models
                 // A fail is considered non-fatal if no other package has dependencies to this package.
                 // Otherwise a fail is always fatal, because other packages rely on this one and when it is missing they may not work.
                 bool isFatalFail = info.HasDependencies;
-                
+
                 PackageDownloadException exception = new PackageDownloadException(package, version, ex);
                 exception.IsFatalFail = isFatalFail;
                 throw exception;

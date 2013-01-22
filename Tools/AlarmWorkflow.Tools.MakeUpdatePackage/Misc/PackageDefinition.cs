@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Xml.Linq;
 
 namespace AlarmWorkflow.Tools.MakeUpdatePackage.Misc
@@ -8,7 +9,13 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Misc
     {
         #region Properties
 
+        /// <summary>
+        /// Gets/sets the file from which the package definition was loaded.
+        /// </summary>
+        internal System.IO.FileInfo SourceFile { get; set; }
+
         internal string Identifier { get; set; }
+        internal string InstallerClassFile { get; set; }
         internal List<File> IncludedFiles { get; set; }
 
         #endregion
@@ -28,11 +35,18 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Misc
         {
             PackageDefinition def = new PackageDefinition();
             def.Identifier = doc.Root.Element("Identifier").Value;
+            def.InstallerClassFile = TryGetInstallerClassFile(doc.Root);
 
             foreach (XElement fileE in doc.Root.Element("PackageFiles").Elements("File"))
             {
                 File file = new File();
                 file.FileName = fileE.Value;
+
+                if (file.FileName.StartsWith("$"))
+                {
+                    Debug.WriteLine("File names must not start with '$' (reserved).");
+                    return null;
+                }
 
                 XAttribute keepA = fileE.Attribute("Keep");
                 if (keepA != null)
@@ -47,6 +61,16 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Misc
             }
 
             return def;
+        }
+
+        private static string TryGetInstallerClassFile(XElement rootE)
+        {
+            XElement installerClassFileE = rootE.Element("InstallerClassFile");
+            if (installerClassFileE == null)
+            {
+                return null;
+            }
+            return installerClassFileE.Value;
         }
 
         #endregion
@@ -75,5 +99,6 @@ namespace AlarmWorkflow.Tools.MakeUpdatePackage.Misc
         }
 
         #endregion
+
     }
 }

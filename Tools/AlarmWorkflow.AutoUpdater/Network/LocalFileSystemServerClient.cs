@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Diagnostics;
 
 namespace AlarmWorkflow.Tools.AutoUpdater.Network
 {
@@ -11,6 +12,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Network
         #region Constants
 
         private const string VersionsXmlFileName = "versions.xml";
+        private static readonly string PackagesListFileName = Debugger.IsAttached ? "packages.dev.xml" : Properties.Settings.Default.PackagesListFileName;
 
         #endregion
 
@@ -27,7 +29,7 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Network
 
         Stream IServerClient.DownloadServerPackageList()
         {
-            string filePath = Path.Combine(RootFolder, Properties.Settings.Default.PackagesListFileName);
+            string filePath = Path.Combine(RootFolder, PackagesListFileName);
             return File.OpenRead(filePath);
         }
 

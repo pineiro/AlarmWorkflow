@@ -186,4 +186,10 @@ Wenn Sie möchten, können Sie fortfahren.</value>
 
 Die Gründe für das Scheitern sind vielfältig. Bitte sehen Sie im Log nach, was der Grund dafür sein kann.</value>
   </data>
+  <data name="PackageInstallAllFilesExtractedMessage" xml:space="preserve">
+    <value>Alle Dateien wurden extrahiert.</value>
+  </data>
+  <data name="PackageInstallUpdatedLocalVersionsConfig" xml:space="preserve">
+    <value>Lokale Paketversionsinformation aktualisiert.</value>
+  </data>
 </root>
