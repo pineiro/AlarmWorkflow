@@ -3,4 +3,8 @@
     <Type>Regular</Type>
     <Changelog></Changelog>
   </Version>
+  <Version Version="0.1.1.0" Timestamp="2012-01-22T10:00">
+    <Type>Minor</Type>
+    <Changelog></Changelog>
+  </Version>
 </VersionHistory>
