@@ -1,5 +1,5 @@
 <Package>
-  <Identifier>Parser.MucLandParser</Identifier>
+  <Identifier>Parser.MucLand</Identifier>
   <PackageFiles>
     <File>AlarmWorkflow.Parser.MucLandParser.dll</File>
   </PackageFiles>

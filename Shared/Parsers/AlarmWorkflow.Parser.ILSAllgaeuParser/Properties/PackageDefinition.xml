@@ -1,5 +1,5 @@
 <Package>
-  <Identifier>Parser.ILSAllgaeuParser</Identifier>
+  <Identifier>Parser.ILSAllgaeu</Identifier>
   <PackageFiles>
     <File>AlarmWorkflow.Parser.ILSAllgaeuParser.dll</File>
   </PackageFiles>

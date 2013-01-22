@@ -1,5 +1,5 @@
 <Package>
-  <Identifier>WinUI.OV.CustomWidget.Google</Identifier>
+  <Identifier>WinUI.OV.CW.GoogleMaps</Identifier>
   <PackageFiles>
     <File>AlarmWorkflow.Windows.UIWidgets.GoogleMaps.dll</File>
   </PackageFiles>

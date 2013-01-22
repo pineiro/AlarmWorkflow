@@ -1,5 +1,5 @@
 <Package>
-  <Identifier>Parser.ILSAnsbachParser</Identifier>
+  <Identifier>Parser.ILSAnsbach</Identifier>
   <PackageFiles>
     <File>AlarmWorkflow.Parser.ILSAnsbachParser.dll</File>
   </PackageFiles>

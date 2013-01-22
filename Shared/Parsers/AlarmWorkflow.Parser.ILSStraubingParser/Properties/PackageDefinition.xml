@@ -1,5 +1,5 @@
 <Package>
-  <Identifier>Parser.ILSStraubingParser</Identifier>
+  <Identifier>Parser.ILSStraubing</Identifier>
   <PackageFiles>
     <File>AlarmWorkflow.Parser.ILSStraubingParser.dll</File>
   </PackageFiles>

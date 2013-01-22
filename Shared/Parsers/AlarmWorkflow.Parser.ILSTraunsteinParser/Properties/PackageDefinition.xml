@@ -1,5 +1,5 @@
 <Package>
-  <Identifier>Parser.ILSTraunsteinParser</Identifier>
+  <Identifier>Parser.ILSTraunstein</Identifier>
   <PackageFiles>
     <File>AlarmWorkflow.Parser.ILSTraunsteinParser.dll</File>
   </PackageFiles>

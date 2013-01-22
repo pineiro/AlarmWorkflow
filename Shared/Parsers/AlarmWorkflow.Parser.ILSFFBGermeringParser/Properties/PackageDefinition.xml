@@ -1,5 +1,5 @@
 <Package>
-  <Identifier>Parser.ILSFFBGermeringParser</Identifier>
+  <Identifier>Parser.ILSFFBGermering</Identifier>
   <PackageFiles>
     <File>AlarmWorkflow.Parser.ILSFFBGermeringParser.dll</File>
   </PackageFiles>

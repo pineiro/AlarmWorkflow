@@ -1,5 +1,5 @@
 <Package>
-  <Identifier>Parser.ILSSchweinfurtParser</Identifier>
+  <Identifier>Parser.ILSSchweinfurt</Identifier>
   <PackageFiles>
     <File>AlarmWorkflow.Parser.ILSSchweinfurtParser.dll</File>
   </PackageFiles>

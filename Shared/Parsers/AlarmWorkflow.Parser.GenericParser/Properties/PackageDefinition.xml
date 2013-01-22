@@ -1,5 +1,5 @@
 <Package>
-  <Identifier>Parser.GenericParser</Identifier>
+  <Identifier>Parser.Generic</Identifier>
   <PackageFiles>
     <File>AlarmWorkflow.Parser.GenericParser.exe</File>
   </PackageFiles>
