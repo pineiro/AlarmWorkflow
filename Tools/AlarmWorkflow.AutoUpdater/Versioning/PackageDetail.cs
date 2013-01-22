@@ -95,12 +95,16 @@ namespace AlarmWorkflow.Tools.AutoUpdater.Versioning
             entry.Type = type;
             entry.Changelog = versionElement.Element("Changelog").Value;
 
-            foreach (XElement depE in versionElement.Element("Dependencies").Elements("Dependency"))
+            XElement depsE = versionElement.Element("Dependencies");
+            if (depsE != null)
             {
-                PackageDetailEntryDependency dep = new PackageDetailEntryDependency();
-                dep.Identifier = depE.Attribute("To").Value;
-                dep.Version = Version.Parse(depE.Attribute("Version").Value);
-                entry.Dependencies.Add(dep);
+                foreach (XElement depE in depsE.Elements("Dependency"))
+                {
+                    PackageDetailEntryDependency dep = new PackageDetailEntryDependency();
+                    dep.Identifier = depE.Attribute("To").Value;
+                    dep.Version = Version.Parse(depE.Attribute("Version").Value);
+                    entry.Dependencies.Add(dep);
+                }
             }
 
             return entry;
